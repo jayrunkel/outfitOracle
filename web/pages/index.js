@@ -13,7 +13,7 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  const getAndSetAllProducts = async () => {
+  async function getAndSetAllProducts() {
     // add your Realm App Id to the .env.local file
     const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
     const app = new Realm.App({ id: REALM_APP_ID });
@@ -27,7 +27,7 @@ export default function Home() {
     } catch (error) {
       console.error(error);
     }
-  };
+  }
 
   useEffect(() => {
     getAndSetAllProducts()
@@ -40,7 +40,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-white w-full min-h-screen">
-        <Header />
+        <Header/>
         <Container>
           <Hero />
           <Category
@@ -48,7 +48,7 @@ export default function Home() {
             categories={categories}
             productCount={`${products.length} Products`}
           />
-          <Products products={products} />
+          <Products products={products}/>
           <Pagination />
         </Container>
         <Footer />

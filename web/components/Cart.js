@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import CartItem from "./CartItem";
+//import { useCartContext } from "../context/cartContext";
 import {
   XIcon,
   PlusCircleIcon,
   ArrowNarrowRightIcon,
 } from "@heroicons/react/outline";
 
-const Cart = ({ isCartOpen, setIsCartOpen }) => {
+const Cart = ({ isCartOpen, setIsCartOpen, cartItems}) => {
+
+  
   return (
     <div
       className={`${
@@ -23,80 +27,12 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
         </button>
       </div>
       <hr className="my-3" />
-      <div className="flex justify-between mt-6">
-        <div className="flex">
-          <Image
-            src="/images/react.jpg"
-            height={80}
-            width={80}
-            objectFit="cover"
-            className="rounded"
-            alt="React T-Shirt"
-          />
-          <div className="mx-3">
-            <h3 className="text-sm text-gray-600">React T-Shirt</h3>
-            <div className="flex items-center mt-2">
-              <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <PlusCircleIcon className="h-5 w-5" />
-              </button>
-              <span className="text-gray-700 mx-2">1</span>
-              <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <XIcon className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-        <span className="text-gray-600">$39</span>
-      </div>
-      <div className="flex justify-between mt-6">
-        <div className="flex">
-          <Image
-            src="/images/html.jpg"
-            height={80}
-            width={80}
-            objectFit="cover"
-            className="rounded"
-            alt="HTML T-Shirt"
-          />
-          <div className="mx-3">
-            <h3 className="text-sm text-gray-600">HTML T-Shirt</h3>
-            <div className="flex items-center mt-2">
-              <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <PlusCircleIcon className="h-5 w-5" />
-              </button>
-              <span className="text-gray-700 mx-2">2</span>
-              <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <XIcon className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-        <span className="text-gray-600">$39</span>
-      </div>
-      <div className="flex justify-between mt-6">
-        <div className="flex">
-          <Image
-            src="/images/mongodb.png"
-            height={80}
-            width={80}
-            objectFit="cover"
-            className="rounded"
-            alt="MongoDB T-Shirt"
-          />
-          <div className="mx-3">
-            <h3 className="text-sm text-gray-600">MongoDB T-Shirt</h3>
-            <div className="flex items-center mt-2">
-              <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <PlusCircleIcon className="h-5 w-5" />
-              </button>
-              <span className="text-gray-700 mx-2">1</span>
-              <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                <XIcon className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-        <span className="text-gray-600">$39</span>
+      <div>
+      {
+        cartItems.map((product) => (
+          <CartItem key={product._id} product={product} /> 
+        ))
+      }
       </div>
       <div className="mt-8">
         <form className="flex items-center justify-center">

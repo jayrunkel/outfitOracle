@@ -1,8 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import { PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/outline";
+import { useCartContext } from "../context/cartContext";
+
+
+
 
 const ProductDetail = ({ product }) => {
+
+  const [cartItems, addItemToCart] = useCartContext()  
+  
   return (
     <div className="md:flex md:items-center">
       <div className="w-full h-64 md:w-1/2 lg:h-96 relative">
@@ -33,7 +40,8 @@ const ProductDetail = ({ product }) => {
           </div>
         </div>
         <div className="flex items-center mt-6">
-          <button className="px-8 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500">
+          <button className="px-8 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500"
+                  onClick={() => addItemToCart(product)}>
             Add To Cart
           </button>
         </div>

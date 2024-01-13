@@ -8,6 +8,7 @@ import {
   SearchIcon,
 } from "@heroicons/react/outline";
 import Cart from "./Cart";
+import { useCartContext } from "../context/cartContext";
 
 const Header = () => {
   const router = useRouter();
@@ -15,6 +16,8 @@ const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [autoComplete, setAutoComplete] = useState([]);
+  let [cartItems] = useCartContext();
+  
 
   const searchUE = async () => {
     if (searchTerm.length) {
@@ -151,7 +154,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+      <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} cartItems={cartItems}/>
     </>
   );
 };

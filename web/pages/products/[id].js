@@ -44,7 +44,7 @@ const ProductDetails = () => {
           <div className="bg-white w-full min-h-screen">
             <Header />
             <Container>
-              <ProductDetail product={product} />
+              <ProductDetail product={product}/>
             </Container>
             <Footer />
           </div>
