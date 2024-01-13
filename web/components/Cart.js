@@ -111,7 +111,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
         </form>
       </div>
       <a className="flex items-center justify-center mt-4 px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500 cursor-pointer">
-        <span>Chechout</span>
+        <span>Checkout</span>
         <ArrowNarrowRightIcon className="w-5 h-5" />
       </a>
     </div>

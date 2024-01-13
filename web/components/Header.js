@@ -142,7 +142,7 @@ const Header = () => {
                       className="px-4 py-2 hover:bg-green-300 cursor-pointer"
                       onClick={() => handleSelect(item._id)}
                     >
-                      {item.name}
+                      {item.productDisplayName}
                     </li>
                   );
                 })}

@@ -7,15 +7,15 @@ const ProductDetail = ({ product }) => {
     <div className="md:flex md:items-center">
       <div className="w-full h-64 md:w-1/2 lg:h-96 relative">
         <Image
-          src={product.image || "http://assets.myntassets.com/v1/images/style/properties/7a5b82d1372a7a5c6de67ae7a314fd91_images.jpg"}
-          alt={product.name || "No Product Name"}
+          src={product.link || "http://assets.myntassets.com/v1/images/style/properties/7a5b82d1372a7a5c6de67ae7a314fd91_images.jpg"}
+          alt={product.productDisplayName || "No Product Name"}
           layout="fill"
           objectFit="cover"
           className="absolute z-0 rounded"
         />
       </div>
       <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
-        <h3 className="text-gray-700 uppercase text-lg">{product.name || "No Product Name"}</h3>
+        <h3 className="text-gray-700 uppercase text-lg">{product.productDisplayName || "No Product Name"}</h3>
         <span className="text-gray-500 mt-3">${product.price}</span>
         <hr className="my-3" />
         <div className="mt-2">

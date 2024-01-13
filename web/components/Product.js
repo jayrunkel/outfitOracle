@@ -9,8 +9,8 @@ const Product = ({ product }) => {
       <div className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden cursor-pointer hover:shadow-2xl transition">
         <div className="flex items-end justify-end h-56 w-full bg-cover relative">
           <Image
-            src={product.imagePath || "http://assets.myntassets.com/v1/images/style/properties/7a5b82d1372a7a5c6de67ae7a314fd91_images.jpg"}
-            alt={product.name || "No Product Name"}
+            src={product.link || "http://assets.myntassets.com/v1/images/style/properties/7a5b82d1372a7a5c6de67ae7a314fd91_images.jpg"}
+            alt={product.productDisplayName || "No Product Name"}
             layout="fill"
             objectFit="cover"
             className="absolute z-0"
@@ -20,7 +20,7 @@ const Product = ({ product }) => {
           </button>
         </div>
         <div className="px-5 py-3">
-          <h3 className="text-gray-700 uppercase">{product.name || "No Product Name"}</h3>
+          <h3 className="text-gray-700 uppercase">{product.productDisplayName || "No Product Name"}</h3>
           <span className="text-gray-500 mt-2">${product.price}</span>
         </div>
       </div>
