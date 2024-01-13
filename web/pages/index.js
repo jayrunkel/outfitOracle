@@ -13,7 +13,7 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  useEffect(async () => {
+  const getAndSetAllProducts = async () => {
     // add your Realm App Id to the .env.local file
     const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
     const app = new Realm.App({ id: REALM_APP_ID });
@@ -27,12 +27,16 @@ export default function Home() {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  useEffect(() => {
+    getAndSetAllProducts()
   }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
-        <title>Create Next App</title>
+        <title>Outfit Oracle</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-white w-full min-h-screen">

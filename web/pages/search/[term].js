@@ -13,7 +13,7 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const { query } = useRouter();
 
-  useEffect(async () => {
+  const searchProductsUE = async () => {
     if (query.term) {
       // add your Realm App Id to the .env.local file
       const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
@@ -27,6 +27,10 @@ export default function Home() {
         console.error(error);
       }
     }
+  };
+
+  useEffect(() => {
+    searchProductsUE()
   }, [query]);
 
   return (

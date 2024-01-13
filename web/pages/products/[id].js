@@ -12,7 +12,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState();
   const { query } = useRouter();
 
-  useEffect(async () => {
+  const getAndSetProduct = async () => {
     if (query.id) {
       // add your Realm App Id to the .env.local file
       const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
@@ -27,6 +27,10 @@ const ProductDetails = () => {
         console.error(error);
       }
     }
+  };
+
+  useEffect(() => {
+    getAndSetProduct()
   }, [query]);
 
   return (

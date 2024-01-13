@@ -16,7 +16,7 @@ const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [autoComplete, setAutoComplete] = useState([]);
 
-  useEffect(async () => {
+  const searchUE = async () => {
     if (searchTerm.length) {
       // add your Realm App Id to the .env.local file
       const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
@@ -34,6 +34,10 @@ const Header = () => {
     } else {
       setAutoComplete([]);
     }
+  };
+
+  useEffect(() => {
+    searchUE()
   }, [searchTerm]);
 
   const handleSubmit = (e) => {

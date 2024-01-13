@@ -12,7 +12,7 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  useEffect(async () => {
+  const getUniqueCategoriesUE = async () => {
     // add your Realm App Id to the .env.local file
     const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
     const app = new Realm.App({ id: REALM_APP_ID });
@@ -26,6 +26,10 @@ export default function Home() {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  useEffect(() => {
+    getUniqueCategoriesUE()
   }, []);
 
   return (
