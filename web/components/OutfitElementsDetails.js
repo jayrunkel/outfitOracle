@@ -26,11 +26,12 @@ const OutfitElementsDetails = ({ outfit }) => {
       
       <div className="w-full  mx-auto mt-5 md:ml-8 md:mt-0">
         <h3 className="text-gray-700 uppercase text-lg">{outfit.productDisplayName || "No Outfit Name"}</h3>
+        <div className="text-gray-300 mt-3">{outfit.description || "No outfit description"}</div>
         <span className="text-gray-500 mt-3">Price Range ${outfit.price}</span>
         <hr className="my-3" />
         <div className="mt-2">
-          <label className="text-gray-700 text-lg" htmlFor="count">
-            Outfit Elements:
+          <label className="text-green-500 text-2xl font-semibold" htmlFor="count">
+            Complete The Look:
           </label>
           <div className="flex items-center mt-1 ml-4">
             <ol>
@@ -41,12 +42,6 @@ const OutfitElementsDetails = ({ outfit }) => {
             }
             </ol>
           </div>
-        </div>
-        <div className="flex items-center mt-6">
-          <button className="px-8 py-2 bg-green-600 text-white text-sm font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500"
-                  onClick={() => addItemToCart(outfit)}>
-            Add To Cart
-          </button>
         </div>
       </div>
     </div>

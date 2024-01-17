@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Products from "./Products";
+import FolderIcon from "./FolderIcon";
+
 
 
 
@@ -14,7 +16,10 @@ const OutfitElementProducts = ({outfit, elementName, index}) => {
 
     return (
         <li className="mb-4">
-            <div onClick={toggleVisibility}>{elementName}</div>
+            <div className="flex w-full" onClick={toggleVisibility}>
+                <FolderIcon className="h-6 mr-2"/>
+                {elementName}
+                </div>
             <div className={`${isVisible ? 'block' : 'hidden'}`}>
               <Products products={outfit.outfit_results[index]}/>
             </div>
