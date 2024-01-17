@@ -66,7 +66,7 @@ def search_db():
                         "discountPercentage": 1,
                         "averageRating": 1,
                         "searchID": 1,
-                        "_id": 0,
+                        "_id": 1,
                         "link": 1,
                         'score': {
                             '$meta': 'searchScore'
@@ -99,3 +99,6 @@ def search_db():
     collection.create_index('expiration_time')
 
     print(json_result)
+
+
+search_db()
