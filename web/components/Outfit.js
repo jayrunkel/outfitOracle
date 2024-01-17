@@ -9,7 +9,7 @@ const Outfit = ({ outfit }) => {
       <div className="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden cursor-pointer hover:shadow-2xl transition">
         <div className="flex items-end justify-end h-56 w-full bg-cover relative">
           <Image
-            src={outfit.link || "http://assets.myntassets.com/v1/images/style/properties/7a5b82d1372a7a5c6de67ae7a314fd91_images.jpg"}
+            src={outfit.dalle_image || "http://assets.myntassets.com/v1/images/style/properties/7a5b82d1372a7a5c6de67ae7a314fd91_images.jpg"}
             alt={outfit.productDisplayName || "No Outfit Name"}
             layout="fill"
             objectFit="cover"

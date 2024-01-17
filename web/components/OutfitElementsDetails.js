@@ -15,7 +15,7 @@ const OutfitElementsDetails = ({ outfit }) => {
     <div className="w-full">
      <div className="w-full h-64 md:w-1/2 lg:h-96 relative">
         <Image
-          src={outfit.link || "http://assets.myntassets.com/v1/images/style/properties/7a5b82d1372a7a5c6de67ae7a314fd91_images.jpg"}
+          src={outfit.dalle_image || "http://assets.myntassets.com/v1/images/style/properties/7a5b82d1372a7a5c6de67ae7a314fd91_images.jpg"}
           alt={outfit.productDisplayName || "No outfit Name"}
           layout="fill"
           objectFit="cover"
@@ -36,7 +36,7 @@ const OutfitElementsDetails = ({ outfit }) => {
           <div className="flex items-center mt-1 ml-4">
             <ol>
             {
-              outfit.outfit_array.map((eName, index) =>
+              outfit.outfit_array.outfit_articles.map((eName, index) =>
                 <OutfitElementProducts outfit={outfit} elementName={eName} index={index}/>
               )
             }

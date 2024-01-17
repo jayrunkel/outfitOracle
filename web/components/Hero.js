@@ -8,6 +8,7 @@ import { ArrowNarrowRightIcon } from "@heroicons/react/outline";
 const Hero = () => {
   const router = useRouter();
   const [selectedImageId, setSelectedImageId] = useState("");
+  const [selectedImageSearchId, setSelectedImageSearchId] = useState("");
   const [selectedImageLink, setSelectedImageLink] = useState("");
   const [prompt, setPrompt] = useState("");
   const [images, setImages] = useState([]);
@@ -39,6 +40,7 @@ const Hero = () => {
     const data = {
       prompt: event.target.prompt.value,
       image: selectedImageId,
+      email: "jay.runkel@mongodb.com"
     }
                 
     // Send the data to the server in JSON format.
@@ -76,11 +78,14 @@ const Hero = () => {
 
         console.log(response.data);
         
-        alert(`Presenting search ID data: ${response.data}`)
+        //alert(`Presenting search ID data: ${response.data}`)
+        alert(`[hack] Presenting search ID data: ${selectedImageSearchId}`)
       
 
     router.push({
-      pathname: `/products/aiEngine/20240117145550948214`
+      //pathname: `/products/aiEngine/${response.data}`
+      pathname: `/products/aiEngine/${selectedImageSearchId}`
+      //pathname: `/products/aiEngine/20240117145550948214`
       });
     }
     catch (error) {
@@ -90,11 +95,13 @@ const Hero = () => {
 
   const handleImageChange = (e) => {
     console.log(JSON.stringify(e.target.value));
-    const [image, link] = e.target.value.split("|");
+    const [image, link, searchId] = e.target.value.split("|");
     console.log(image);
     console.log(link);
+    console.log(searchId);
     setSelectedImageId(image);
     setSelectedImageLink(link);
+    setSelectedImageSearchId(searchId);
   };
 
   return ( // overflow-hidden bg-cover bg-center relative
@@ -122,12 +129,12 @@ const Hero = () => {
              </label>
              <select id="imageSelect" 
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={selectedImageId + '|' + selectedImageLink}
+                value={selectedImageId + '|' + selectedImageLink + '|' + selectedImageSearchId}
                 onChange={handleImageChange}>
                 <option value="">Select your preferred look...</option>
                 {
                   images.map((image) => 
-                    <option key={image._id} value={image._id + "|" + image.image_link}>{image.image_name}</option>
+                    <option key={image._id} value={image._id + "|" + image.image_link + "|" + image.searchID}>{image.image_name}</option>
                   )
                 }
               </select>                

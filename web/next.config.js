@@ -10,6 +10,12 @@ module.exports = {
                 pathname: '/v1/**',
             },
             {
+              protocol: 'http',
+              hostname: 'assets.myntassets.com',
+              port: '',
+              pathname: '/assets/images/**',
+          },
+            {
               protocol: 'https',
               hostname: 'outfitoracle-mtfxc.mongodbstitch.com',
               port: '',
@@ -20,10 +26,16 @@ module.exports = {
             hostname: '127.0.0.1',
             port: '5000',
             pathname: '/image/**',
-        }
-            
-        ]
-    }
+        },
+        {
+          protocol: 'https',
+          hostname: 'dalleproduse.blob.core.windows.net',
+          port: '',
+          pathname: '/private/images/**',
+      }
+        
+    ]
+  }
 }
 
 /*    
