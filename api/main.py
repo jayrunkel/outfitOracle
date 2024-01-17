@@ -43,6 +43,20 @@ def upload_file():
         compressed_image_io.seek(0)
         image_binary = binary.Binary(compressed_image_io.getvalue())
 
+        # create a version that's 256px tall and write it to image_binary_256
+        img_256 = img.resize((int(img.width * 256 / img.height), 256))
+        compressed_image_io_256 = io.BytesIO()
+        img_256.save(compressed_image_io_256, format='JPEG', quality=85)
+        compressed_image_io_256.seek(0)
+        image_binary_256 = binary.Binary(compressed_image_io_256.getvalue())
+
+        # create a version that's 128px tall and write it to image_binary_128
+        img_128 = img.resize((int(img.width * 128 / img.height), 128))
+        compressed_image_io_128 = io.BytesIO()
+        img_128.save(compressed_image_io_128, format='JPEG', quality=50)
+        compressed_image_io_128.seek(0)
+        image_binary_128 = binary.Binary(compressed_image_io_128.getvalue())
+
         # Timestamp and filename
         timestamp = datetime.datetime.utcnow()
         filename = image_file.filename
@@ -51,13 +65,16 @@ def upload_file():
         connection = pymongo.MongoClient(mongo_uri)
         imageCollection = connection[db]['userUploads']
         document = {'image_name': filename,
-                    'image_binary': image_binary, 'uploaded_timestamp': timestamp}
+                    'image_binary': image_binary, 'image_binary_256': image_binary_256, 'image_binary_128': image_binary_128, 'uploaded_timestamp': timestamp}
         insert_result = imageCollection.insert_one(document)
         image_id = insert_result.inserted_id
 
         # Start a background task for vectorization
         threading.Thread(target=async_vectorize, args=(
             image_id, io.BytesIO(image_binary))).start()
+
+        imageCollection.update_one({'_id': image_id}, {
+            '$set': {'image_link': "http://127.0.0.1:5000/image/"+str(image_id)}})
 
         return {'_id': str(image_id), 'image_name': filename}, 200
     else:

@@ -15,32 +15,52 @@ The Outfit Oracle, an AI-driven fashion stylist, transforms the shopping journey
 We decided to build this application to address the challenges users face in curating personalized outfits and simplifying the shopping process. The inspiration came from the desire to leverage AI technologies to enhance the fashion discovery journey. 
 The concept behind 'The Outfit Oracle' can be extended to revolutionize various e-commerce domains and product categories where MongoDB hosts the product catalog. This app will help the Presales team to highlight the seamless integration of genAI and MongoDB, making demos more engaging and impactful.
 
-MongoDB Competitive Differentiators:
+***MongoDB Competitive Differentiators:***
 
 * Developer Productivity
-    * Flexibility Document Model
+    * Flexible Document Model
     * Aggregation Framework
-    * 
 * Lower TCO
     * Atlas Search 
     * Built-in Vector Search
 * Faster Time to Market
-    * App Services - Charts
-
-
-
-_What MongoDB competitive differentiators (developer productivity, resiliency, scalability, etc.) does this demonstration showcase?_
+    * Real-time Analytics
 
 # Detailed Application Overview
 
-_Describe the architecture of your application and include a diagram._
-_List all the MongoDB components/products used in your demonstration._
-_Describe what you application does and how it works_
+### Architecture Diagram ###
+![image](https://github.com/jayrunkel/outfitOracle/assets/45085638/d1bb56c8-b5c0-4c66-8af2-35de244fb90e)
 
+***MongoDB Components/ Products Used:***
+Atlas, App Services, Charts, Full-text Search, Vector Search, Aggregation Framework, VS code MDB playground
+
+***Description***: Users can upload photos, describe their requirements, and receive personalized outfit recommendations. The AI engine summarizes why each outfit suits the occasion. After outfit selection, the app identifies product options, allowing users to refine their choices. DALL-E generates a user image in the selected outfit. Users confirm selections, and items are seamlessly added to the shopping cart.
+
+**1. User Profile and Requirements Input:**
+   * User uploads a photo of an item of clothing (optional).
+   * User enters a paragraph describing their requirements for the outfit or the event they are planning to attend.
+
+**2. AI Output Product Matching:**
+   * The AI engine generates a few outfit options according to the requirements
+   * The AI engine sends the LLM results to MongoDB to perform a vector search against the product catalog 
+     to suggest the avaliable products.
+     
+**3. Product Options Display and User Selection:**
+   * Outfits, descriptions, and AI reasoning are sent back to the UI.
+   * For the selected outfit, display product options by category
+   * User can select items and add them to the shopping cart
+
+This application aims to streamline the outfit selection and shopping experience, providing users with tailored suggestions and an interactive platform to refine their choices before making a purchase. In the future, DALL-E will generate a photo of the user in the selected outfit using the set of products they selected so they can make an informed decision.
+Allow the user to refine their selections.
 
 # Roles and Responsibilities
 
-_List all the team members and summarize the contributions each member made to this project_
+* Jay Runkel - **UI/UX Maestro**
+* Chris Tselebis **Visualization Wizard**
+* Samadnya Kalaskar **Search Enchantress**
+* Jason Scanzoni **Flask Sorcerer**
+* Peter Do **AI Prompt Alchemist**
+
 
 # Demonstration Script
 
