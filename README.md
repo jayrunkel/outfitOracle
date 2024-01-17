@@ -1,5 +1,8 @@
 # Outfit Oracle
 
+## Whitelist Your IP in Azure
+[Add it here](https://portal.azure.com/#@mongodb0.onmicrosoft.com/resource/subscriptions/ddff37eb-831c-4e1b-ae37-19af67c300e7/resourceGroups/gucci-gang-hackathon-24/providers/Microsoft.CognitiveServices/accounts/outfitoracle/accessControl)
+
 ## Start API
 In Terminal:
 ```
