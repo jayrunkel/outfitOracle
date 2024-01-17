@@ -1,18 +1,34 @@
 # Outfit Oracle
 # Details
 
-**Project** : _insert project title here_  
-**Team Number** : _insert team number here_  
-**Team Name** : _insert team name here_  
+**Project** : Outfit Oracle 
+**Team Number** : 2 
+**Team Name** : Gucci Gang  
 **Demonstration Video** : _Insert link to demonstration video_  
 
 # Overview
 
-_Insert Executive Overview of your application/demonstration_
+The Outfit Oracle, an AI-driven fashion stylist, transforms the shopping journey by seamlessly integrating AI-driven outfit suggestions and precise product matching. Users can effortlessly upload photos, articulate their preferences, and enjoy personalized outfit recommendations. The AI engine goes beyond suggestions, providing insightful summaries on why each outfit perfectly aligns with the occasion, offering a truly curated and sophisticated shopping experience.
 
 # Justification
 
-_Please explain why you decided to build the application/demonstration for this project. What inspired you? What problems does it solve or how will it make Presales activities easier?_
+We decided to build this application to address the challenges users face in curating personalized outfits and simplifying the shopping process. The inspiration came from the desire to leverage AI technologies to enhance the fashion discovery journey. 
+The concept behind 'The Outfit Oracle' can be extended to revolutionize various e-commerce domains and product categories where MongoDB hosts the product catalog. This app will help the Presales team to highlight the seamless integration of genAI and MongoDB, making demos more engaging and impactful.
+
+MongoDB Competitive Differentiators:
+
+* Developer Productivity
+    * Flexibility Document Model
+    * Aggregation Framework
+    * 
+* Lower TCO
+    * Atlas Search 
+    * Built-in Vector Search
+* Faster Time to Market
+    * App Services - Charts
+
+
+
 _What MongoDB competitive differentiators (developer productivity, resiliency, scalability, etc.) does this demonstration showcase?_
 
 # Detailed Application Overview
