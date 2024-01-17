@@ -18,7 +18,6 @@ const Header = () => {
   const [autoComplete, setAutoComplete] = useState([]);
   let [cartItems] = useCartContext();
   
-
   const searchUE = async () => {
     if (searchTerm.length) {
       // add your Realm App Id to the .env.local file
@@ -66,7 +65,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <Link href="/">
               <div className="w-full text-green-500 text-2xl font-semibold cursor-pointer">
-                MongoStore
+                Outfit Oracle
               </div>
             </Link>
             <div className="flex items-center justify-end w-full">

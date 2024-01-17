@@ -8,7 +8,14 @@ module.exports = {
                 hostname: 'assets.myntassets.com',
                 port: '',
                 pathname: '/v1/**',
-            }
+            },
+            {
+              protocol: 'https',
+              hostname: 'outfitoracle-mtfxc.mongodbstitch.com',
+              port: '',
+              pathname: '/images/**',
+          }
+            
         ]
     }
 }
