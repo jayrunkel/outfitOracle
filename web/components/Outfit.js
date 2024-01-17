@@ -15,16 +15,16 @@ const Outfit = ({ outfit }) => {
             objectFit="cover"
             className="absolute z-0"
           />
-          <div>
-            {outfit.description || "No Description"}
-          </div>
           <button className="absolute z-10 p-2 rounded-full bg-green-600 text-white mx-5 -mb-4 hover:bg-green-500 focus:outline-none focus:bg-green-500">
             <ShoppingCartIcon className="w-5 h-5" /> 
           </button>
         </div>
         <div className="px-5 py-3">
-          <h3 className="text-gray-700 uppercase">{outfit.productDisplayName || "No Product Name"}</h3>
-          <span className="text-gray-500 mt-2">${outfit.price}</span>
+          <h3 className="text-gray-700 uppercase">{outfit.productDisplayName || "No Outfit Name"}</h3>
+          <div>
+            {outfit.description || "No Description"}
+          </div>
+          <span className="text-gray-500 mt-2">${outfit.price || "0.00"}</span>
         </div>
       </div>
     </Link>

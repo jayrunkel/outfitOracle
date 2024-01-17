@@ -24,13 +24,14 @@ const Hero = () => {
     const JSONdata = JSON.stringify(data)
 
     // API endpoint where we send form data.
-    const endpoint = '/api/callAIEngine'
+    const endpoint = 'http://127.0.0.1:5000/prompt'
 
     // Form the request for sending data to the server.
     const options = {
       // The method is POST because we are sending data.
       method: 'POST',
       // Tell the server we're sending JSON.
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -41,8 +42,8 @@ const Hero = () => {
     console.log("sending data: ", JSONdata);
     try {
         // Make an API call to the route you created in step 2
-        /*
-        const response = fetch(endpoint, options)
+
+        const response = await fetch(endpoint, options)
         /*
         const response = await axios({
             method: "post",
@@ -51,14 +52,14 @@ const Hero = () => {
             headers: { "Content-Type": "multipart/form-data" },
           });
         */
-        /*
+
         console.log(response.data);
         
         alert(`Presenting search ID data: ${response.data}`)
-        */
+      
 
     router.push({
-      pathname: `/products/aiEngine/20240116234943306610`
+      pathname: `/products/aiEngine/20240117145550948214`
       });
     }
     catch (error) {
