@@ -1,0 +1,18 @@
+{
+  "_id": {
+    "$oid": "65a6c352363965e8f99bf81c"
+  },
+  "customerId": "65a6f67fe84137eef3262f2d",
+  "first": "Jay",
+  "last": "Runkel",
+  "gender": "male",
+  "skinTone": "blue",
+  "heritage": "german",
+  "favColor": "blue",
+  "preferredStyle": "sharp",
+  "age": "58",
+  "pictureFile": "ManStyle1.jpg",
+  "pantSize": "large",
+  "shirtSize": "small",
+  "email": "jay.runkel@mongodb.com"
+}
