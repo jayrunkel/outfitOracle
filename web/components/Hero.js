@@ -58,7 +58,7 @@ const Hero = () => {
         */
 
     router.push({
-      pathname: `/products/aiEngine/20240116232701553344`,
+      pathname: `/products/aiEngine/20240116234943306610`
       });
     }
     catch (error) {
@@ -89,7 +89,7 @@ const Hero = () => {
              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="prompt">
                Describe Your Dream Outfit
              </label>    
-             <textarea id="prompt" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your dream outfit..."></textarea>
+             <textarea id="prompt" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your dream outfit..."></textarea>
              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
                Provide Sample Outfit Picture
              </label>

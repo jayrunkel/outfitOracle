@@ -62,8 +62,8 @@ const Header = () => {
     <>
       <header>
         <div className="container mx-auto px-6 py-3">
-          <div className="flex items-center justify-between">
-            <Link href="/">
+          <div className="flex-auto items-center justify-between">
+            <Link href="/" className="w-150">
               <div className="w-full text-green-500 text-2xl font-semibold cursor-pointer">
                 Outfit Oracle
               </div>

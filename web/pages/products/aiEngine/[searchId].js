@@ -7,11 +7,10 @@ import Container from "../../../components/Container";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
 import Pagination from "../../../components/Pagination";
-import Products from "../../../components/Products";
+import Outfits from "../../../components/Outfits";
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [outfits, setOutfits] = useState([]);
   const { query } = useRouter();
 
   const getProductRecommendations = async () => {
@@ -19,12 +18,12 @@ export default function Home() {
     const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
     const app = new Realm.App({ id: REALM_APP_ID });
     const credentials = Realm.Credentials.anonymous();
+
+    console.log({query: query});
     try {
       const user = await app.logIn(credentials);
-      const recommendProducts = await user.functions.getSearchProducts(query.searchId);
-      setProducts(() => recommendProducts);
-      const uniqueCategories = await user.functions.getUniqueCategories();
-      setCategories(() => uniqueCategories);
+      const recommendProducts = await user.functions.getSearchOutfitResults(query.searchId);
+      setOutfits(() => recommendProducts);
     } catch (error) {
       console.error(error);
     }
@@ -43,12 +42,7 @@ export default function Home() {
       <div className="bg-white w-full min-h-screen">
         <Header />
         <Container>
-          <Category
-            category="All Products"
-            categories={categories}
-            productCount={`${products.length} Products`}
-          />
-          <Products products={products} />
+          <Outfits outfits={outfits} />
           <Pagination />
         </Container>
         <Footer />
