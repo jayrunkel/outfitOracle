@@ -103,7 +103,7 @@ def get_image(_id):
 @app.route("/prompt", methods=["POST"])
 def send_prompt():
     data = request.get_json()
-    prompt.prompt(data)
+    return jsonify(prompt.prompt(request))
 
 
 if __name__ == '__main__':
