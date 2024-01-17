@@ -15,21 +15,16 @@ The Outfit Oracle, an AI-driven fashion stylist, transforms the shopping journey
 We decided to build this application to address the challenges users face in curating personalized outfits and simplifying the shopping process. The inspiration came from the desire to leverage AI technologies to enhance the fashion discovery journey. 
 The concept behind 'The Outfit Oracle' can be extended to revolutionize various e-commerce domains and product categories where MongoDB hosts the product catalog. This app will help the Presales team to highlight the seamless integration of genAI and MongoDB, making demos more engaging and impactful.
 
-MongoDB Competitive Differentiators:
+***MongoDB Competitive Differentiators:***
 
 * Developer Productivity
-    * Flexibility Document Model
+    * Flexible Document Model
     * Aggregation Framework
-    * 
 * Lower TCO
     * Atlas Search 
     * Built-in Vector Search
 * Faster Time to Market
-    * App Services - Charts
-
-
-
-_What MongoDB competitive differentiators (developer productivity, resiliency, scalability, etc.) does this demonstration showcase?_
+    * Real-time Analytics
 
 # Detailed Application Overview
 
