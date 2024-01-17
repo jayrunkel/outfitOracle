@@ -30,7 +30,6 @@ def hello_world():
 
 
 @app.route("/upload", methods=["POST"])
-@app.route("/upload", methods=["POST"])
 def upload_file():
     if 'image' in request.files:
         image_file = request.files['image']
@@ -104,7 +103,7 @@ def get_image(_id):
 @app.route("/prompt", methods=["POST"])
 def send_prompt():
     data = request.get_json()
-    prompt.prompt(data)
+    return jsonify(prompt.prompt(request))
 
 
 if __name__ == '__main__':

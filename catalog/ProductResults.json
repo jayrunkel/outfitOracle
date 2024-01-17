@@ -1,0 +1,662 @@
+{
+  "_id": {
+    "$oid": "65a7ea7826594c863fa42dfd"
+  },
+  "outfit_array": [
+    "Black Tuxedo",
+    "White Dress Shirt",
+    "Black Bow Tie",
+    "Black Dress Shoes"
+  ],
+  "outfit_results": [
+    [
+      {
+        "_id": {
+          "$oid": "659c98cb0f4de551dc991c74"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/5908b5ad60acd66c9d94740e4f342778_images.jpg",
+        "productDisplayName": "Allen Solly Men Black Tie",
+        "imageFile": "35088.jpg",
+        "price": 79.68,
+        "discountPercentage": 8,
+        "averageRating": 3.68,
+        "imageVector": [
+          0.1280047595500946, 1.0652201175689697, -0.09424349665641785,
+          0.37934985756874084, 0.2029750645160675
+        ],
+        "score": 0.6235777139663696
+      },
+      {
+        "_id": {
+          "$oid": "659ca0280f4de551dc992b07"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/7d6b1b4aeac60ff553ffa1de31bc8fd6_images.jpg",
+        "productDisplayName": "Turtle Men Solid Black Ties",
+        "imageFile": "15953.jpg",
+        "price": 19.03,
+        "discountPercentage": 23,
+        "averageRating": 3.45,
+        "imageVector": [
+          0.05756351351737976, 1.2899000644683838, -0.32732972502708435,
+          0.316167950630188, 0.17293091118335724
+        ],
+        "score": 0.6222679018974304
+      },
+      {
+        "_id": {
+          "$oid": "659c9e940f4de551dc9927e1"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/80787c514da1b7bc2c109c312dfbbf63_images.jpg",
+        "productDisplayName": "Parx Men Black Tie",
+        "imageFile": "50293.jpg",
+        "price": 63.92,
+        "discountPercentage": 8,
+        "averageRating": 3.16,
+        "imageVector": [
+          -0.008892998099327087, 0.6621087789535522, -0.05723252147436142,
+          0.3357902765274048, 0.652042031288147
+        ],
+        "score": 0.6220269203186035
+      },
+      {
+        "_id": {
+          "$oid": "659c85ba0f4de551dc98f75c"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/Hakashi-Men-Black-Tie_31fc3618473f4605e9d0779e6034bb40_images.jpg",
+        "productDisplayName": "Hakashi Men Black Silk Tie",
+        "imageFile": "58897.jpg",
+        "price": 10.82,
+        "discountPercentage": 19,
+        "averageRating": 3.47,
+        "imageVector": [
+          0.11501912772655487, 0.719530463218689, -0.22144261002540588,
+          1.0482066869735718, 0.27088463306427
+        ],
+        "score": 0.6219397187232971
+      },
+      {
+        "_id": {
+          "$oid": "659ca1990f4de551dc992dea"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/b7140ebc30829e731152e26c1236b2a1_images.jpg",
+        "productDisplayName": "Parx Men Black Tie",
+        "imageFile": "50295.jpg",
+        "price": 83.96,
+        "discountPercentage": 24,
+        "averageRating": 4.36,
+        "imageVector": [
+          -0.12676186859607697, 1.1370265483856201, -0.23567068576812744,
+          0.4110473394393921, 0.49294719099998474
+        ],
+        "score": 0.6218565106391907
+      },
+      {
+        "_id": {
+          "$oid": "659c97a10f4de551dc991a2e"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/91a085faa9168ba9ac8ef6208f47ffc1_images.jpg",
+        "productDisplayName": "Indigo Nation Men Strip Blue Ties",
+        "imageFile": "11154.jpg",
+        "price": 70.82,
+        "discountPercentage": 5,
+        "averageRating": 4.39,
+        "imageVector": [
+          0.30062806606292725, 1.216902732849121, -0.286947101354599,
+          0.49240925908088684, 0.27122241258621216
+        ],
+        "score": 0.6210160851478577
+      },
+      {
+        "_id": {
+          "$oid": "659c9fc00f4de551dc992a34"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/4dac74a2f1ac763f4ae64bfeb6fd3561_images.jpg",
+        "productDisplayName": "Parx Men Black Tie",
+        "imageFile": "50288.jpg",
+        "price": 70.15,
+        "discountPercentage": 6,
+        "averageRating": 4.36,
+        "imageVector": [
+          0.11146831512451172, 0.8681049346923828, -0.14979487657546997,
+          0.16631382703781128, 0.46129941940307617
+        ],
+        "score": 0.6204009056091309
+      },
+      {
+        "_id": {
+          "$oid": "659c84330f4de551dc98f460"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/2d4bb59f7b81611a559ff0642e3dcc1e_images.jpg",
+        "productDisplayName": "Park Avenue Men Black Tie",
+        "imageFile": "49733.jpg",
+        "price": 91.39,
+        "discountPercentage": 10,
+        "averageRating": 3.91,
+        "imageVector": [
+          0.09784203767776489, 1.1559066772460938, -0.04415193200111389,
+          0.2644062042236328, 0.255621075630188
+        ],
+        "score": 0.6203663945198059
+      },
+      {
+        "_id": {
+          "$oid": "659c974e0f4de551dc991989"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/fdf087b146104db8e4a13bdbc0b3d05d_images.jpg",
+        "productDisplayName": "Homme Men Black Formal Oxford Shoes",
+        "imageFile": "33353.jpg",
+        "price": 54.78,
+        "discountPercentage": 9,
+        "averageRating": 4.82,
+        "imageVector": [
+          0.8253636360168457, 1.4796264171600342, -0.08652182668447495,
+          0.8388835191726685, -0.0007710494101047516
+        ],
+        "score": 0.6199715733528137
+      },
+      {
+        "_id": {
+          "$oid": "659c857a0f4de551dc98f6df"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/Park-Avenue-Men-Black-Tie_5f7b125851604adaf70dbf9e1d80e09f_images.jpg",
+        "productDisplayName": "Park Avenue Men Black Tie",
+        "imageFile": "49735.jpg",
+        "price": 69.68,
+        "discountPercentage": 15,
+        "averageRating": 3.19,
+        "imageVector": [
+          0.06635195016860962, 1.1175003051757812, -0.06826764345169067,
+          0.5277620553970337, 0.08618955314159393
+        ],
+        "score": 0.6199553608894348
+      }
+    ],
+    [
+      {
+        "_id": {
+          "$oid": "659c91a20f4de551dc990e52"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/76548d1aea4fbea390d09786ed490679_images.jpg",
+        "productDisplayName": "John Players Men Solid White Shirt",
+        "imageFile": "37802.jpg",
+        "price": 25.11,
+        "discountPercentage": 20,
+        "averageRating": 4.1,
+        "imageVector": [
+          1.1905457973480225, 1.5419692993164062, -0.055576860904693604,
+          0.8646396398544312, 0.5279984474182129
+        ],
+        "score": 0.6262332201004028
+      },
+      {
+        "_id": {
+          "$oid": "659c711b0f4de551dc98cf4f"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/27f41de6e52f15c6e11b8fc4ae98e889_images.jpg",
+        "productDisplayName": "Allen Solly Men White Shirt",
+        "imageFile": "38086.jpg",
+        "price": 23.94,
+        "discountPercentage": 16,
+        "averageRating": 4.38,
+        "imageVector": [
+          1.001485824584961, 1.6210253238677979, 0.16901114583015442,
+          0.13877688348293304, 0.4971223473548889
+        ],
+        "score": 0.6260043978691101
+      },
+      {
+        "_id": {
+          "$oid": "659c6ab60f4de551dc98c30e"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/Arrow-Men-White-Shirt_2932379cb330c9dc164bc770bb1ccf71_images.jpg",
+        "productDisplayName": "Arrow Men White Shirt",
+        "imageFile": "14768.jpg",
+        "price": 84.43,
+        "discountPercentage": 7,
+        "averageRating": 3.72,
+        "imageVector": [
+          0.9916818141937256, 1.6014875173568726, 0.20609652996063232,
+          -0.12858381867408752, 0.1393129527568817
+        ],
+        "score": 0.624695360660553
+      },
+      {
+        "_id": {
+          "$oid": "659c61c20f4de551dc98b290"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/Arrow-Men-White-Striped-Shirt_e9c86c6203c4b2ac6d9739069ebc71e7_images.jpg",
+        "productDisplayName": "Arrow Men White Striped Shirt",
+        "imageFile": "26790.jpg",
+        "price": 97.28,
+        "discountPercentage": 20,
+        "averageRating": 3.01,
+        "imageVector": [
+          1.0487607717514038, 1.3867884874343872, -0.21593692898750305,
+          1.2492599487304688, 0.5256333947181702
+        ],
+        "score": 0.6226397156715393
+      },
+      {
+        "_id": {
+          "$oid": "659ca7c00f4de551dc9939d6"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/1aebf4832d558e4d843ef792a85d7917_images.jpg",
+        "productDisplayName": "Arrow Men White Shirt",
+        "imageFile": "33233.jpg",
+        "price": 64.79,
+        "discountPercentage": 18,
+        "averageRating": 4.59,
+        "imageVector": [
+          0.9850800037384033, 1.2651546001434326, -0.023967236280441284,
+          0.7256144285202026, 0.4759126901626587
+        ],
+        "score": 0.6203884482383728
+      },
+      {
+        "_id": {
+          "$oid": "659c5d640f4de551dc98aabf"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/Arrow-Men-White-Shirt_3ec5e2c7290344e3629f5ef820347faa_images.jpg",
+        "productDisplayName": "Arrow Men White Shirt",
+        "imageFile": "59445.jpg",
+        "price": 67.53,
+        "discountPercentage": 9,
+        "averageRating": 4.14,
+        "imageVector": [
+          0.829093337059021, 1.380927562713623, 0.015489757061004639,
+          1.0144251585006714, 0.5747280120849609
+        ],
+        "score": 0.6196178197860718
+      },
+      {
+        "_id": {
+          "$oid": "659c65380f4de551dc98b8e8"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/e45cad57aa5035989463c1a3947a1bd0_images.jpg",
+        "productDisplayName": "Arrow Men Solid White Shirts",
+        "imageFile": "14748.jpg",
+        "price": 77.68,
+        "discountPercentage": 8,
+        "averageRating": 3.61,
+        "imageVector": [
+          1.294290542602539, 1.3280677795410156, -0.2522236108779907,
+          0.0243082195520401, 0.3031124472618103
+        ],
+        "score": 0.6195645928382874
+      },
+      {
+        "_id": {
+          "$oid": "659c9c540f4de551dc992357"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/a57200d51062b4c0a74a6b9b5a805306_images.jpg",
+        "productDisplayName": "United Colors of Benetton Men Summer White Shirts",
+        "imageFile": "11378.jpg",
+        "price": 24.85,
+        "discountPercentage": 14,
+        "averageRating": 4.78,
+        "imageVector": [
+          0.8945385217666626, 1.2201120853424072, -0.05545666813850403,
+          1.3487060070037842, 0.2895265221595764
+        ],
+        "score": 0.6193618178367615
+      },
+      {
+        "_id": {
+          "$oid": "659c6c610f4de551dc98c62a"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/Reid---Taylor-Men-White-Shirt_7868945b6d3a95140b08b1719b0092f1_images.jpg",
+        "productDisplayName": "Reid & Taylor Men White Shirt",
+        "imageFile": "12367.jpg",
+        "price": 40.03,
+        "discountPercentage": 20,
+        "averageRating": 3.23,
+        "imageVector": [
+          0.9734686017036438, 1.323002576828003, -0.0966053307056427,
+          1.0924195051193237, 0.4520637094974518
+        ],
+        "score": 0.6190351843833923
+      },
+      {
+        "_id": {
+          "$oid": "659c5c550f4de551dc98a8c5"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/c05de74810211b2f52debfee67cf91a6_images.jpg",
+        "productDisplayName": "Peter England Men Solid White Shirt",
+        "imageFile": "16354.jpg",
+        "price": 51.69,
+        "discountPercentage": 6,
+        "averageRating": 4.25,
+        "imageVector": [
+          0.8540570139884949, 1.6252975463867188, -0.02023404836654663,
+          1.2599170207977295, 0.34257060289382935
+        ],
+        "score": 0.6188856959342957
+      }
+    ],
+    [
+      {
+        "_id": {
+          "$oid": "659ca0280f4de551dc992b07"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/7d6b1b4aeac60ff553ffa1de31bc8fd6_images.jpg",
+        "productDisplayName": "Turtle Men Solid Black Ties",
+        "imageFile": "15953.jpg",
+        "price": 19.03,
+        "discountPercentage": 23,
+        "averageRating": 3.45,
+        "imageVector": [
+          0.05756351351737976, 1.2899000644683838, -0.32732972502708435,
+          0.316167950630188, 0.17293091118335724
+        ],
+        "score": 0.628048837184906
+      },
+      {
+        "_id": {
+          "$oid": "659c9fc00f4de551dc992a34"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/4dac74a2f1ac763f4ae64bfeb6fd3561_images.jpg",
+        "productDisplayName": "Parx Men Black Tie",
+        "imageFile": "50288.jpg",
+        "price": 70.15,
+        "discountPercentage": 6,
+        "averageRating": 4.36,
+        "imageVector": [
+          0.11146831512451172, 0.8681049346923828, -0.14979487657546997,
+          0.16631382703781128, 0.46129941940307617
+        ],
+        "score": 0.6263530850410461
+      },
+      {
+        "_id": {
+          "$oid": "659c5bb60f4de551dc98a7a9"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/Parx-Men-Black-Tie_889edddff1aa73ea528fa69934fbea0e_images.jpg",
+        "productDisplayName": "Parx Men Black Tie",
+        "imageFile": "50297.jpg",
+        "price": 22.86,
+        "discountPercentage": 17,
+        "averageRating": 3.84,
+        "imageVector": [
+          0.056537628173828125, 1.0673389434814453, -0.1680828332901001,
+          0.49273768067359924, 0.214163675904274
+        ],
+        "score": 0.6263217926025391
+      },
+      {
+        "_id": {
+          "$oid": "659c71d10f4de551dc98d0a3"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/25a8211fa79017257598ca112dadee1c_images.jpg",
+        "productDisplayName": "Turtle Men Check Black Ties",
+        "imageFile": "15956.jpg",
+        "price": 24.01,
+        "discountPercentage": 12,
+        "averageRating": 3.15,
+        "imageVector": [
+          0.4960927963256836, 1.1885793209075928, -0.47371044754981995,
+          0.20517215132713318, 0.3528525233268738
+        ],
+        "score": 0.6262874603271484
+      },
+      {
+        "_id": {
+          "$oid": "659c6ca90f4de551dc98c6b2"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/d1069f88ff2dd173550ed7b3291f4a49_images.jpg",
+        "productDisplayName": "United Colors of Benetton Men Woven Black Tie",
+        "imageFile": "19232.jpg",
+        "price": 83.61,
+        "discountPercentage": 17,
+        "averageRating": 3.47,
+        "imageVector": [
+          0.5252431631088257, 1.200742244720459, -0.20234382152557373,
+          0.9481374025344849, -0.04209856688976288
+        ],
+        "score": 0.6256426572799683
+      },
+      {
+        "_id": {
+          "$oid": "659c97a10f4de551dc991a2e"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/91a085faa9168ba9ac8ef6208f47ffc1_images.jpg",
+        "productDisplayName": "Indigo Nation Men Strip Blue Ties",
+        "imageFile": "11154.jpg",
+        "price": 70.82,
+        "discountPercentage": 5,
+        "averageRating": 4.39,
+        "imageVector": [
+          0.30062806606292725, 1.216902732849121, -0.286947101354599,
+          0.49240925908088684, 0.27122241258621216
+        ],
+        "score": 0.6249510645866394
+      },
+      {
+        "_id": {
+          "$oid": "659c98cb0f4de551dc991c74"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/5908b5ad60acd66c9d94740e4f342778_images.jpg",
+        "productDisplayName": "Allen Solly Men Black Tie",
+        "imageFile": "35088.jpg",
+        "price": 79.68,
+        "discountPercentage": 8,
+        "averageRating": 3.68,
+        "imageVector": [
+          0.1280047595500946, 1.0652201175689697, -0.09424349665641785,
+          0.37934985756874084, 0.2029750645160675
+        ],
+        "score": 0.624748945236206
+      },
+      {
+        "_id": {
+          "$oid": "659ca1990f4de551dc992dea"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/b7140ebc30829e731152e26c1236b2a1_images.jpg",
+        "productDisplayName": "Parx Men Black Tie",
+        "imageFile": "50295.jpg",
+        "price": 83.96,
+        "discountPercentage": 24,
+        "averageRating": 4.36,
+        "imageVector": [
+          -0.12676186859607697, 1.1370265483856201, -0.23567068576812744,
+          0.4110473394393921, 0.49294719099998474
+        ],
+        "score": 0.6240599155426025
+      },
+      {
+        "_id": {
+          "$oid": "659c84330f4de551dc98f460"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/2d4bb59f7b81611a559ff0642e3dcc1e_images.jpg",
+        "productDisplayName": "Park Avenue Men Black Tie",
+        "imageFile": "49733.jpg",
+        "price": 91.39,
+        "discountPercentage": 10,
+        "averageRating": 3.91,
+        "imageVector": [
+          0.09784203767776489, 1.1559066772460938, -0.04415193200111389,
+          0.2644062042236328, 0.255621075630188
+        ],
+        "score": 0.6226537823677063
+      },
+      {
+        "_id": {
+          "$oid": "659c888a0f4de551dc98fc98"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/a070c22157c158ab1b27f2ca3c8ac3c2_images.jpg",
+        "productDisplayName": "Turtle Men Check Black Ties",
+        "imageFile": "15949.jpg",
+        "price": 96.6,
+        "discountPercentage": 25,
+        "averageRating": 4.22,
+        "imageVector": [
+          0.28378647565841675, 1.2108854055404663, -0.07617394626140594,
+          0.41418275237083435, 0.07790073752403259
+        ],
+        "score": 0.6224134564399719
+      }
+    ],
+    [
+      {
+        "_id": {
+          "$oid": "659c974e0f4de551dc991989"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/fdf087b146104db8e4a13bdbc0b3d05d_images.jpg",
+        "productDisplayName": "Homme Men Black Formal Oxford Shoes",
+        "imageFile": "33353.jpg",
+        "price": 54.78,
+        "discountPercentage": 9,
+        "averageRating": 4.82,
+        "imageVector": [
+          0.8253636360168457, 1.4796264171600342, -0.08652182668447495,
+          0.8388835191726685, -0.0007710494101047516
+        ],
+        "score": 0.627598226070404
+      },
+      {
+        "_id": {
+          "$oid": "659c665f0f4de551dc98bb18"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/ac272f4757547b2a05bf5307448a3116_images.jpg",
+        "productDisplayName": "Clarks Men Extra Look Black Formal Shoe",
+        "imageFile": "21059.jpg",
+        "price": 37.31,
+        "discountPercentage": 9,
+        "averageRating": 4.04,
+        "imageVector": [
+          0.7857635021209717, 1.3807955980300903, -0.20915478467941284,
+          0.6952171325683594, 0.04282817989587784
+        ],
+        "score": 0.6271966099739075
+      },
+      {
+        "_id": {
+          "$oid": "659c93850f4de551dc99120c"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/bfed7e14f17abd854a3fb1c041b7f117_images.jpg",
+        "productDisplayName": "Homme Men Black Formal Shoes",
+        "imageFile": "33338.jpg",
+        "price": 97.51,
+        "discountPercentage": 15,
+        "averageRating": 4.23,
+        "imageVector": [
+          0.9902210235595703, 1.5229413509368896, -0.1269896924495697,
+          0.9001020789146423, 0.042425379157066345
+        ],
+        "score": 0.627144455909729
+      },
+      {
+        "_id": {
+          "$oid": "659c7bd00f4de551dc98e40b"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/feb462ee98a1362b670521981f4cc837_images.jpg",
+        "productDisplayName": "Franco Leone Men Black Formal Shoes",
+        "imageFile": "47227.jpg",
+        "price": 24.64,
+        "discountPercentage": 20,
+        "averageRating": 4.56,
+        "imageVector": [
+          0.7517744302749634, 1.2300961017608643, -0.06913557648658752,
+          0.8710644245147705, 0.16053235530853271
+        ],
+        "score": 0.6270837187767029
+      },
+      {
+        "_id": {
+          "$oid": "659ca38d0f4de551dc9931b7"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/fe8ce95f79f453493e501629b696424d_images.jpg",
+        "productDisplayName": "Rockport Men's Alfrew Black Shoe",
+        "imageFile": "7242.jpg",
+        "price": 94.4,
+        "discountPercentage": 9,
+        "averageRating": 4.29,
+        "imageVector": [
+          0.7644943594932556, 1.4730161428451538, -0.220645472407341,
+          0.804311990737915, 0.27856847643852234
+        ],
+        "score": 0.6265389919281006
+      },
+      {
+        "_id": {
+          "$oid": "659c61180f4de551dc98b151"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/d420d5dcd3311bb52b7500f75a401c3a_images.jpg",
+        "productDisplayName": "Franco Leone Men Formal Black Formal Shoes",
+        "imageFile": "11896.jpg",
+        "price": 25.51,
+        "discountPercentage": 7,
+        "averageRating": 3.84,
+        "imageVector": [
+          0.44885754585266113, 1.06654953956604, -0.1034364104270935,
+          1.0125161409378052, 0.33091747760772705
+        ],
+        "score": 0.6261700987815857
+      },
+      {
+        "_id": {
+          "$oid": "659c7ddd0f4de551dc98e80e"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/5e38d316ff7885ffa3ce6a28e3009c29_images.jpg",
+        "productDisplayName": "Red Tape Men Formal Black Formal Shoes",
+        "imageFile": "12516.jpg",
+        "price": 13.47,
+        "discountPercentage": 5,
+        "averageRating": 3.92,
+        "imageVector": [
+          0.5265984535217285, 1.2853807210922241, -0.2136048972606659,
+          0.7207001447677612, 0.16851811110973358
+        ],
+        "score": 0.6261448860168457
+      },
+      {
+        "_id": {
+          "$oid": "659c5eb60f4de551dc98acf8"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/7e5e0163a9327652e8b7b53b8b48a91d_images.jpg",
+        "productDisplayName": "Provogue Men Formal Black Formal Shoes",
+        "imageFile": "12875.jpg",
+        "price": 81.76,
+        "discountPercentage": 11,
+        "averageRating": 3.91,
+        "imageVector": [
+          0.31769445538520813, 1.0096721649169922, 0.075741246342659,
+          1.2104310989379883, 0.058756664395332336
+        ],
+        "score": 0.6255722045898438
+      },
+      {
+        "_id": {
+          "$oid": "659c791b0f4de551dc98dec9"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/1cffa7f972ab77c902079e088c060866_images.jpg",
+        "productDisplayName": "Lee Cooper Men's LC Formal Leather Black Shoe",
+        "imageFile": "2823.jpg",
+        "price": 44.52,
+        "discountPercentage": 24,
+        "averageRating": 3.07,
+        "imageVector": [
+          0.9223453998565674, 1.2813184261322021, -0.2811398208141327,
+          0.8344687819480896, 0.35540732741355896
+        ],
+        "score": 0.6251038312911987
+      },
+      {
+        "_id": {
+          "$oid": "659c76010f4de551dc98d8c4"
+        },
+        "link": "http://assets.myntassets.com/v1/images/style/properties/f9458f9689b329a3fee1c6aa5fbaa6de_images.jpg",
+        "productDisplayName": "Rockport Men's Trinchero Black Shoe",
+        "imageFile": "7224.jpg",
+        "price": 37.78,
+        "discountPercentage": 13,
+        "averageRating": 4.2,
+        "imageVector": [
+          0.7058703303337097, 1.2498773336410522, -0.011003457009792328,
+          1.3559963703155518, 0.15139903128147125
+        ],
+        "score": 0.6250916719436646
+      }
+    ]
+  ],
+  "searchID": "20240117145550948214"
+}
