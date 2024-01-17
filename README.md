@@ -28,22 +28,26 @@ The concept behind 'The Outfit Oracle' can be extended to revolutionize various 
 
 # Detailed Application Overview
 
-_Describe the architecture of your application and include a diagram._
-_List all the MongoDB components/products used in your demonstration._
+### Architecture Diagram ###
+![image](https://github.com/jayrunkel/outfitOracle/assets/45085638/d1bb56c8-b5c0-4c66-8af2-35de244fb90e)
+
+***MongoDB Components/ Products Used:***
+
+
 _Describe what you application does and how it works_
 
 
 # Roles and Responsibilities
 
-* Jay Runkel - ***UI/UX Maestro***
+* Jay Runkel - ***UI/UX Maestro**
      *
-* Chris Tselebis ***Visualization Wizard***
+* Chris Tselebis ***Visualization Wizard**
      *
-* Samadnya Kalaskar ***Search Enchantress***
+* Samadnya Kalaskar ***Search Enchantress**
      *
-* Jason Scanzoni ***Flask Sorcerer***
+* Jason Scanzoni ***Flask Sorcerer**
      *
-* Peter Do ***AI Prompt Alchemist***
+* Peter Do ***AI Prompt Alchemist**
      *
 
 
