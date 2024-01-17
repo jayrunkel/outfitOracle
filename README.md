@@ -32,7 +32,7 @@ The concept behind 'The Outfit Oracle' can be extended to revolutionize various 
 ![image](https://github.com/jayrunkel/outfitOracle/assets/45085638/d1bb56c8-b5c0-4c66-8af2-35de244fb90e)
 
 ***MongoDB Components/ Products Used:***
-
+Atlas, App Services, Charts, Full-text Search, Vector Search, Aggregation Framework, 
 
 _Describe what you application does and how it works_
 
