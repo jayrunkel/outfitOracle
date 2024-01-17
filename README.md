@@ -16,9 +16,9 @@ We decided to build this application to address the challenges users face in cur
 The concept behind 'The Outfit Oracle' can be extended to revolutionize various e-commerce domains and product categories where MongoDB hosts the product catalog. This app will help the Presales team to highlight the seamless integration of genAI and MongoDB, making demos more engaging and impactful.
 
 MongoDB Competitive Differentiators showcased in this demo:
-Markup : - Flexibility of the Document Model
-         - Atlas Search 
-         - Built-in Vector Search
+* _Flexibility of the Document Model
+* _Atlas Search 
+* _Built-in Vector Search
 
 
 
