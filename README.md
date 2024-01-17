@@ -40,13 +40,13 @@ Summary: Users can upload photos, describe their requirements, and receive perso
 **1. User Profile and Requirements Input:**
    * User uploads a photo of an item of clothing (optional).
    * User enters a paragraph describing their requirements for the outfit or the event they are planning to attend.
+
 **2. Outfit Selection and AI Summarization:**
    * Based on the prompt, the AI engine sends the LLM results to MongoDB to perform a vector search against the product catalog to suggest a few outfit options.
    * Product Results are written to a temporary collection for the user
    * Outfits, descriptions, and AI reasoning are sent back to the UI.
-4. User Selection and Product Matching:
-
-2.UI displays outfit options with AI-generated explanations.
+**3. User Selection and Product Matching:**
+UI displays outfit options with AI-generated explanations.
 User selects one outfit.
 Perform a vector search against the product catalog to identify product options for the selected outfit.
 Send product options back to the UI.
