@@ -1,13 +1,8 @@
 from sentence_transformers import SentenceTransformer, util
 from PIL import Image
 import pymongo
-import os
-import sys
-import concurrent.futures
-import random
 from bson import json_util
 import json
-import pprint
 from datetime import datetime, timedelta
 
 preTrainedModelName = "clip-ViT-L-14"
@@ -19,13 +14,13 @@ collection = "OutfitOracle"
 # List of input arrays of outfit attributes
 outfit_arrays_list = [
     [
-        "Black Tuxedo","White Dress Shirt","Black Bow Tie","Black Dress Shoes"
+        "Black Tuxedo", "White Dress Shirt", "Black Bow Tie", "Black Dress Shoes"
     ],
     [
-        "White Watch","Sequin Dress","Black Heels","White Purse"
+        "White Watch", "Sequin Dress", "Black Heels", "White Purse"
     ],
-     [
-        "Grey Tuxedo","Sequin Dress","Black Heels","White Purse"
+    [
+        "Grey Tuxedo", "Sequin Dress", "Black Heels", "White Purse"
     ],
     # Add more arrays of outfit attributes as needed
 ]
@@ -70,7 +65,7 @@ for outfit_attributes in outfit_arrays_list:
                     "price": 1,
                     "discountPercentage": 1,
                     "averageRating": 1,
-                    "searchID":1,
+                    "searchID": 1,
                     "_id": 0,
                     "link": 1,
                     'score': {
@@ -84,7 +79,8 @@ for outfit_attributes in outfit_arrays_list:
         outfit_results.append(list(product_collection.aggregate(pipeline)))
 
     # Append results for this outfit array to the list
-    results.append({'outfit_array': outfit_attributes, 'outfit_results': outfit_results, 'searchID': search_id})
+    results.append({'outfit_array': outfit_attributes,
+                   'outfit_results': outfit_results, 'searchID': search_id})
 
 # Convert results to JSON
 json_result = json.dumps({'results': results}, default=json_util.default)
@@ -103,4 +99,3 @@ collection.insert_many(results)
 collection.create_index('expiration_time')
 
 print(json_result)
-
