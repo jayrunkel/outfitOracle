@@ -37,13 +37,14 @@ Atlas, App Services, Charts, Full-text Search, Vector Search, Aggregation Framew
 _Describe what you application does and how it works_
 Summary: Users can upload photos, describe their requirements, and receive personalized outfit recommendations. The AI engine summarizes why each outfit suits the occasion. After outfit selection, the app identifies product options, allowing users to refine their choices. DALL-E generates a user image in the selected outfit. Users confirm selections, and items are seamlessly added to the shopping cart.
 
-1. **User Profile and Requirements Input:**
-   1.User uploads a photo of an item of clothing (optional).
-   2.User enters a paragraph describing their requirements for the outfit or the event they are planning to attend.
-2. Outfit Selection and AI Summarization:
-   1.Based on the prompt, the AI engine sends the LLM results to MongoDB to perform a vector search against the product catalog to suggest a few outfit options.
-   2.Product Results are written to a temporary collection for the user
-   3.Outfits, descriptions, and AI reasoning are sent back to the UI.
+**1. User Profile and Requirements Input:**
+      1.User uploads a photo of an item of clothing (optional).
+      2.User enters a paragraph describing their requirements for the outfit or the event they are planning to attend.
+**2. Outfit Selection and AI Summarization:**
+      1.Based on the prompt, the AI engine sends the LLM results to MongoDB to perform a vector search against the product    
+        catalog to suggest a few outfit options.
+      2.Product Results are written to a temporary collection for the user
+      3.Outfits, descriptions, and AI reasoning are sent back to the UI.
 4. User Selection and Product Matching:
 
 2.UI displays outfit options with AI-generated explanations.
