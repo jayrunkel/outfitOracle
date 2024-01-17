@@ -5,6 +5,7 @@ import pprint
 import pymongo
 import logging
 import uuid
+from prompt_img import generate_dalle
 
 openai.api_key = "45eefc80e0914e64995ed91c3c7cf175"
 openai.api_base = "https://outfitoracle.openai.azure.com/" # your endpoint should look like the following https://YOUR_RESOURCE_NAME.openai.azure.com/
@@ -13,7 +14,7 @@ openai.api_version = "2023-09-15-preview" # this might change in the future
 
 logging.basicConfig(level=logging.INFO)
 
-
+retry = True
 def prompt(data):
   searchId = uuid.uuid4()
   logging.info(data.get_json())
@@ -45,24 +46,29 @@ def prompt(data):
 
   customerprofile ='''
   {
-    "_id": {
-      "$oid": "65a6c352363965e8f99bf81c"
-    },
+  "customerData": {
+    "_id": "$oid: 65a6c352363965e8f99bf81c",
     "customerId": "65a6f67fe84137eef3262f2d",
-    "first": "Jay",
-    "last": "Runkel",
+    "firstName": "Jay",
+    "lastName": "Runkel",
     "gender": "male",
     "skinTone": "blue",
     "heritage": "german",
-    "favColor": "blue",
+    "favoriteColor": "blue",
     "preferredStyle": "sharp",
-    "age": "58",
+    "age": 58,
     "pictureFile": "ManStyle1.jpg",
     "pantSize": "large",
     "shirtSize": "small",
     "email": "jay.runkel@mongodb.com"
+    }
   }
   '''
+
+  customer_data = json.loads(customerprofile)
+
+  # customerprofile = {"_id": {"$oid": "65a6c352363965e8f99bf81c"}, "customerId": "65a6f67fe84137eef3262f2d", "first": "Jay", "last": "Runkel", "gender": "male", "skinTone": "blue", "heritage": "german", "favColor": "blue", "preferredStyle": "sharp", "age": "58", "pictureFile": "ManStyle1.jpg", "pantSize": "large", "shirtSize": "small", "email": "jay.runkel@mongodb.com"}
+
 
   deployment_name='outfit-oracle-gpt-turbo-instruct' #This will correspond to the custom name you chose for your deployment when you deployed a model. 
 
@@ -102,8 +108,8 @@ def prompt(data):
     '''
 
   # gpt_instructions = "Give me a JSON form of an array of clothing based on the following prompt: "
-  gpt_instructions = "I " + customerprofile +" am passing this to an API, so your response must be in valid JSON format. Using the user prompt below, create 3 outfits and embed them into a master array. If the user has a customerprofile object:, overwrite the attributes from the customerprofile object in the attribute_extract object.Ensure that the json_data is valid JSON.Minify the JSON object before submitting it as a response. The final output must be formatted in VALID JSON (values are just examples) as follows: \n'''" + \
-      json_data + "'''\n The comments are only there for your instruction and should be left out of the response. Any attributes that are applicable to all articles should be included in the attribute_extract object but also prioritize any data from"+ customerprofile +". Add some variance and be sure that no outfit should share more than 3 of the same articles. "
+  gpt_instructions ="Refer customerprofile as " +customerprofile+" .I  am passing this to an API, so your response must be in valid JSON format. Using the user prompt below, create 3 outfits and embed them into a master array. If the user has a customerprofile object:, overwrite the attributes from the customerprofile object in the attribute_extract object.Ensure that the json_data is valid JSON.Minify the JSON object before submitting it as a response. The final output must be formatted in VALID JSON (values are just examples) as follows: \n'''" + \
+      json_data + "'''\n The comments are only there for your instruction and should be left out of the response. Any attributes that are applicable to all articles should be included in the attribute_extract object but also prioritize any data from customerprofile. Add some variance and be sure that no outfit should share more than 3 of the same articles. "
 
 
 
@@ -126,7 +132,28 @@ def prompt(data):
       logging.info(response_text)
 
 
-      # Parse the response as JSON
+      # # Parse the response as JSON
+      # try:
+      #   json_data = json.loads(response_text)
+      # except:
+      #    # send the response text to OPENAI with a prompt to fix the JSON
+      #   logging.info("JSON Response:")
+      #   logging.info(response_text)
+      #   # Send a completion call to generate an answer
+      #   response = openai.Completion.create(
+      #       engine=deployment_name, 
+      #       prompt="Fix the JSON response from the previous prompt: " + response_text, 
+      #       max_tokens=4000
+      #   )
+
+      
+      #   response_text = response['choices'][0]['text'].strip()
+      #   # Remove any lines from response text that start with '//'
+
+      #   logging.info("Raw Response Text:")
+      #   logging.info(response_text)
+      #   pass
+
       json_data = json.loads(response_text)
 
       # Pretty print the JSON data as if it would be shown for mongodb
@@ -134,6 +161,16 @@ def prompt(data):
       logging.info(json_data)
 
       logging.info(searchId)
+
+
+      payload= json_data
+      payload["searchId"] = searchId
+      # for each each payload.outfits, generate a dalle image and add it to the payload
+      for outfit in payload["outfits"]:
+        outfit["dalle_image"] = generate_dalle(outfit["dalle_prompt"])
+      logging.info(payload)
+      
+
       return {"searchId": searchId} 
 
   except json.JSONDecodeError as e:
