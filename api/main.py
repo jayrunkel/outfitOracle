@@ -30,7 +30,6 @@ def hello_world():
 
 
 @app.route("/upload", methods=["POST"])
-@app.route("/upload", methods=["POST"])
 def upload_file():
     if 'image' in request.files:
         image_file = request.files['image']
