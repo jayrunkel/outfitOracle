@@ -1,0 +1,94 @@
+{
+    "customerprofile": {
+        "_id": {
+            "$oid": "65a6c352363965e8f99bf81c"
+        },
+        "customerId": "65a6f67fe84137eef3262f2d",
+        "first": "Jay",
+        "last": "Runkel",
+        "gender": "male",
+        "skinTone": "blue",
+        "heritage": "german",
+        "favColor": "blue",
+        "preferredStyle": "sharp",
+        "age": "58",
+        "pictureFile": "ManStyle1.jpg",
+        "pantSize": "large",
+        "shirtSize": "small",
+        "email": "jay.runkel@mongodb.com"
+    },
+    "outfits": [
+        {
+            "outfit_articles": [
+                "black fedora",
+                "black sunglasses",
+                "black trench coat",
+                "gray turtleneck sweater",
+                "black combat boots",
+                "black gloves",
+                "black dress pants",
+                "silver watch"
+            ],
+            "attribute_extract": {
+                "masterCategory": "Accessories",
+                "subCategory": "Hats",
+                "articleType": "Fedora",
+                "baseColour": "Black",
+                "season": "Winter",
+                "usage": "Party",
+                "price": 45.99,
+                "averageRating": 4.5
+            },
+            "gpt_response": "Stealth and style come together in this suave spy outfit. The black fedora and trench coat give off a mysterious vibe, while the gray turtleneck adds a touch of sophistication. The black combat boots and gloves are practical for any mission. Top it off with a silver watch for a touch of luxury.",
+            "dalle_prompt": "Present a complete outfit from head to toe. The perfect ensemble for a spy agents themed party with a black fedora, trench coat, gray turtleneck sweater, black combat boots, gloves, dress pants, and a silver watch.",
+            "dalle_image": "https://dalleproduse.blob.core.windows.net/private/images/527b9835-fd23-4344-87a2-1161782fffc9/generated_00.png?se=2024-01-18T17%3A27%3A20Z&sig=nS6aRMBk04319tBfC8aVjVYmyrFFACnMaHJoKxROGsU%3D&ske=2024-01-23T11%3A16%3A01Z&skoid=09ba021e-c417-441c-b203-c81e5dcd7b7f&sks=b&skt=2024-01-16T11%3A16%3A01Z&sktid=33e01921-4d64-4f8c-a055-5bdaffd5e33d&skv=2020-10-02&sp=r&spr=https&sr=b&sv=2020-10-02"
+        },
+        {
+            "outfit_articles": [
+                "black dress shirt",
+                "black suit jacket",
+                "black dress pants",
+                "black leather dress shoes",
+                "gray tie",
+                "metal cufflinks"
+            ],
+            "attribute_extract": {
+                "masterCategory": "Clothing",
+                "subCategory": "Suits",
+                "articleType": "Suits",
+                "baseColour": "Black",
+                "season": "Winter",
+                "usage": "Gala",
+                "price": 149.99,
+                "averageRating": 4.9
+            },
+            "gpt_response": "For a more formal take on the spy look, opt for this sleek black suit. The black dress shirt and suit jacket give a sophisticated appearance, while the gray tie adds some subtle flair. Complete the look with black dress pants, leather dress shoes, and metal cufflinks for a touch of luxury.",
+            "dalle_prompt": "Display a full-body view. A sharp and stylish choice for a spy agents themed party, this outfit features a black dress shirt, suit jacket, dress pants, leather dress shoes, a gray tie, and metal cufflinks.",
+            "dalle_image": "https://dalleproduse.blob.core.windows.net/private/images/936406c8-ec5f-4e43-bcce-4676671be8fe/generated_00.png?se=2024-01-18T17%3A27%3A27Z&sig=husf1YGg5ayWHUtMTRz4pmMs1rB85EDV5t3tR%2BL8Ft0%3D&ske=2024-01-22T23%3A24%3A43Z&skoid=09ba021e-c417-441c-b203-c81e5dcd7b7f&sks=b&skt=2024-01-15T23%3A24%3A43Z&sktid=33e01921-4d64-4f8c-a055-5bdaffd5e33d&skv=2020-10-02&sp=r&spr=https&sr=b&sv=2020-10-02"
+        },
+        {
+            "outfit_articles": [
+                "black leather jacket",
+                "black t-shirt",
+                "washed black jeans",
+                "black sneakers",
+                "gunmetal wristband",
+                "black beanie"
+            ],
+            "attribute_extract": {
+                "masterCategory": "Clothing",
+                "subCategory": "Jackets",
+                "articleType": "Leather Jackets",
+                "baseColour": "Black",
+                "season": "Winter",
+                "usage": "Casual",
+                "price": 99.99,
+                "averageRating": 4.7
+            },
+            "gpt_response": "Make a statement at the spy agents party with this edgy black leather jacket, black t-shirt, and washed black jeans. The black sneakers add a sporty touch and the gunmetal wristband adds some subtle bling. Top it off with a black beanie for a touch of cool.",
+            "dalle_prompt": "Display a full-body view. This casual yet stylish outfit is perfect for the spy agents party. Featuring a black leather jacket, t-shirt, washed black jeans, sneakers, a gunmetal wristband, and a black beanie.",
+            "dalle_image": "https://dalleproduse.blob.core.windows.net/private/images/fdea46ca-0f52-4c34-ba85-e13979f6dd1d/generated_00.png?se=2024-01-18T17%3A27%3A34Z&sig=rbJsKCrt6kh%2BxQx1Csv149W5yJ5MmrxEnOYnGcY1kfM%3D&ske=2024-01-23T11%3A16%3A01Z&skoid=09ba021e-c417-441c-b203-c81e5dcd7b7f&sks=b&skt=2024-01-16T11%3A16%3A01Z&sktid=33e01921-4d64-4f8c-a055-5bdaffd5e33d&skv=2020-10-02&sp=r&spr=https&sr=b&sv=2020-10-02"
+        }
+    ],
+    "searchId": "UUID('e209f006-ecb4-41be-bd0a-89d0ce24a79b')"
+}
