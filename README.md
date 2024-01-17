@@ -39,16 +39,11 @@ _Describe what you application does and how it works_
 
 # Roles and Responsibilities
 
-* Jay Runkel - *UI/UX Maestro*
-     *
-* Chris Tselebis ***Visualization Wizard**
-     *
-* Samadnya Kalaskar ***Search Enchantress**
-     *
-* Jason Scanzoni ***Flask Sorcerer**
-     *
-* Peter Do ***AI Prompt Alchemist**
-     *
+* Jay Runkel - **UI/UX Maestro**
+* Chris Tselebis **Visualization Wizard**
+* Samadnya Kalaskar **Search Enchantress**
+* Jason Scanzoni **Flask Sorcerer**
+* Peter Do **AI Prompt Alchemist**
 
 
 # Demonstration Script
