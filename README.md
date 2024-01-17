@@ -35,7 +35,17 @@ _Describe what you application does and how it works_
 
 # Roles and Responsibilities
 
-_List all the team members and summarize the contributions each member made to this project_
+* Jay Runkel - ***UI/UX Maestro***
+     *
+* Chris Tselebis ***Visualization Wizard***
+     *
+* Samadnya Kalaskar ***Search Enchantress***
+     *
+* Jason Scanzoni ***Flask Sorcerer***
+     *
+* Peter Do ***AI Prompt Alchemist***
+     *
+
 
 # Demonstration Script
 
