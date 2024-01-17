@@ -14,7 +14,13 @@ module.exports = {
               hostname: 'outfitoracle-mtfxc.mongodbstitch.com',
               port: '',
               pathname: '/images/**',
-          }
+          },
+          {
+            protocol: 'http',
+            hostname: '127.0.0.1',
+            port: '5000',
+            pathname: '/image/**',
+        }
             
         ]
     }

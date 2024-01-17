@@ -1,13 +1,34 @@
 import React, { useState, useEffect} from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import * as Realm from "realm-web";
 import Link from "next/link";
 import { ArrowNarrowRightIcon } from "@heroicons/react/outline";
 
 const Hero = () => {
   const router = useRouter();
-  const [image, setImage] = useState("");
+  const [selectedImageId, setSelectedImageId] = useState("");
+  const [selectedImageLink, setSelectedImageLink] = useState("");
   const [prompt, setPrompt] = useState("");
+  const [images, setImages] = useState([]);
+
+  async function getImagesFromDB() {
+    // add your Realm App Id to the .env.local file
+    const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
+    const app = new Realm.App({ id: REALM_APP_ID });
+    const credentials = Realm.Credentials.anonymous();
+    try {
+      const user = await app.logIn(credentials);
+      const allImages = await user.functions.getAllImages();
+      setImages(() => allImages);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getImagesFromDB()
+  }, []);
 
   const handleSubmit = async (event) => {
     // Stop the form from submitting and refreshing the page.
@@ -17,7 +38,7 @@ const Hero = () => {
 
     const data = {
       prompt: event.target.prompt.value,
-      image: event.target.image.value,
+      image: selectedImageId,
     }
                 
     // Send the data to the server in JSON format.
@@ -68,7 +89,12 @@ const Hero = () => {
   }
 
   const handleImageChange = (e) => {
-    setImage(e.target.value);
+    console.log(JSON.stringify(e.target.value));
+    const [image, link] = e.target.value.split("|");
+    console.log(image);
+    console.log(link);
+    setSelectedImageId(image);
+    setSelectedImageLink(link);
   };
 
   return ( // overflow-hidden bg-cover bg-center relative
@@ -87,15 +113,24 @@ const Hero = () => {
           <form name="promptForm" onSubmit={handleSubmit}>
             <div className="w-300 h-300">
             
-             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="prompt">
+             <label className="block text-gray-700 text-sm font-bold mb-0" htmlFor="prompt">
                Describe Your Dream Outfit
              </label>    
              <textarea id="prompt" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your dream outfit..."></textarea>
-             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
+             <label className="block text-gray-700 text-sm font-bold mt-4 mb-0" htmlFor="image">
                Provide Sample Outfit Picture
              </label>
-             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                id="image" type="text" placeholder="Enter Image File" onChange={handleImageChange}/> 
+             <select id="imageSelect" 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                value={selectedImageId + '|' + selectedImageLink}
+                onChange={handleImageChange}>
+                <option value="">Select your preferred look...</option>
+                {
+                  images.map((image) => 
+                    <option key={image._id} value={image._id + "|" + image.image_link}>{image.image_name}</option>
+                  )
+                }
+              </select>                
             
           <div className="">
         <div className="px-10 max-w-xl">
@@ -112,7 +147,7 @@ const Hero = () => {
         </div>
         </form>          
         <Image
-          src={"https://outfitoracle-mtfxc.mongodbstitch.com/images/" + image}
+          src={selectedImageLink}
           alt="Outfit Image"
           width="300"
           height="500"
