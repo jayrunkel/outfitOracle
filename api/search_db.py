@@ -6,25 +6,15 @@ import json
 from datetime import datetime, timedelta
 
 
-def search_db():
+def search_db(data):
     preTrainedModelName = "clip-ViT-L-14"
     mongo_uri = "mongodb+srv://GucciGang:GucciGang@guccigang.jxnbg.mongodb.net/?retryWrites=true&w=majority"
     db = "GucciGang"
     collection = "OutfitOracle"
 
+
     # List of input arrays of outfit attributes
-    outfit_arrays_list = [
-        [
-            "Black Tuxedo", "White Dress Shirt", "Black Bow Tie", "Black Dress Shoes"
-        ],
-        [
-            "White Watch", "Sequin Dress", "Black Heels", "White Purse"
-        ],
-        [
-            "Grey Tuxedo", "Sequin Dress", "Black Heels", "White Purse"
-        ],
-        # Add more arrays of outfit attributes as needed
-    ]
+    outfit_arrays_list = [item["outfit_articles"] for item in data]
 
     # Connect to MongoDB
     connection = pymongo.MongoClient(mongo_uri)
@@ -66,6 +56,7 @@ def search_db():
                         "discountPercentage": 1,
                         "averageRating": 1,
                         "searchID": 1,
+                        "masterCategory": 1,
                         "_id": 1,
                         "link": 1,
                         'score': {
@@ -100,5 +91,55 @@ def search_db():
 
     print(json_result)
 
+test = [
+  {
+    "outfit_articles": ["magenta blazer", "black dress pants", "white dress shirt", "silver stilettos", "gold watch", "silver necklace"],
+    "attribute_extract": {
+        "gender": "Female",
+        "masterCategory": "Dresses",
+        "subCategory": "Office Wear",
+        "articleType": ["Blazers", "Pants", "Shirts"],
+        "baseColour": ["Magenta", "Black", "White"],
+        "season": "Spring",
+        "usage": "Formal",
+        "price": 589.95,
+        "averageRating": 4.92
+    },
+    "gpt_response": "I absolutely love this outfit! The magenta blazer gives a professional look while showing off personality. The black dress pants and white dress shirt keep the attention on the blazer. Plus, the gold watch and silver necklace make a nice jewelry statement. Sophisticated and stylish, this outfit is a perfect choice for showing off at a conference.",
+    "dalle_prompt": "Modify this image with a magenta blazer, black dress pants, white dress shirt, silver stilettos, gold watch, and silver necklace."
+  },
+  {
+    "outfit_articles": ["magenta blazer", "black leather pants", "white tank top", "black ankle boots", "gold hoop earrings", "gold bracelet"],
+    "attribute_extract": {
+        "gender": "Female",
+        "masterCategory": "Tops",
+        "subCategory": "Casual Tops",
+        "articleType": ["Blazers", "Pants", "Tops"],
+        "baseColour": ["Magenta", "Black", "White"],
+        "season": "Fall",
+        "usage": "Casual",
+        "price": 878.46,
+        "averageRating": 4.67
+    },
+    "gpt_response": "For a more edgy and fashionable look, pair the magenta blazer with some black leather pants and a simple white tank top. The black ankle boots add a touch of sophistication while the gold hoop earrings and bracelet add some glamour. This outfit is perfect for a young, stylish professional in the tech industry.",
+    "dalle_prompt": "Modify this image with a magenta blazer, black leather pants, white tank top, black ankle boots, gold hoop earrings, and gold bracelet."
+  },
+  {
+    "outfit_articles": ["magenta blazer", "black leather skirt", "blue silk blouse", "silver pumps", "silver statement necklace", "silver bracelet"],
+    "attribute_extract": {
+        "gender": "Female",
+        "masterCategory": "Tops",
+        "subCategory": "Evening Tops",
+        "articleType": ["Blazers", "Skirts", "Tops"],
+        "baseColour": ["Magenta", "Black", "Blue"],
+        "season": "Summer",
+        "usage": "Formal",
+        "price": 1850.80,
+        "averageRating": 4.80
+    },
+    "gpt_response": "For a more sophisticated and glamorous look, pair the magenta blazer with a black leather skirt and blue silk blouse. The silver pumps and statement necklace add some shine while the silver bracelet brings it all together. This outfit is perfect for a sophisticated and fashion-forward tech professional.",
+    "dalle_prompt": "Modify this image with a magenta blazer, black leather skirt, blue silk blouse, silver pumps, silver statement necklace, and silver bracelet."
+  }
+]
 
-search_db()
+search_db(test)
