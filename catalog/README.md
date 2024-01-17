@@ -4,10 +4,9 @@ Smaller Dataset: https://www.kaggle.com/datasets/paramaggarwal/fashion-product-i
 
 Sample Docs for main dataset:
 
-OutfitOracle: Main dataset of all products with embedded vectors generated
+OutfitOracle: Main dataset of all products with embedded vectors generated (encoder_and_loader.py was used to vectorize images)
 
 customerProfiles: User profiles and metadata specific to user's preferences
 
 ProductResults: Collection that stores user's search results
 
-encoder_and_loader.py was used to vectorize images
