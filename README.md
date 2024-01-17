@@ -39,7 +39,7 @@ _Describe what you application does and how it works_
 
 # Roles and Responsibilities
 
-* Jay Runkel - ***UI/UX Maestro**
+* Jay Runkel - *UI/UX Maestro*
      *
 * Chris Tselebis ***Visualization Wizard**
      *
