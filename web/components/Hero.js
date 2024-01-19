@@ -39,10 +39,11 @@ const Hero = () => {
 
     const data = {
       prompt: event.target.prompt.value,
-      image: selectedImageId,
-      email: "jay.runkel@mongodb.com"
-    }
-                
+      }
+      //image: selectedImageId,
+      //email: "jay.runkel@mongodb.com"
+
+          
     // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(data)
 
@@ -56,8 +57,8 @@ const Hero = () => {
       // Tell the server we're sending JSON.
       mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+            },
       // Body of the request is the JSON data we created above.
       body: JSONdata
     }
@@ -66,7 +67,7 @@ const Hero = () => {
     try {
         // Make an API call to the route you created in step 2
 
-        const response = await fetch(endpoint, options)
+        const response = await fetch(endpoint, options);
         /*
         const response = await axios({
             method: "post",

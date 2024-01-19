@@ -10,8 +10,10 @@ const ProfileForm = () => {
     const getFormValues = async (event) => {
         event.preventDefault();
 
+        /*
         let email = event.target.email.value;
         setEmail(email);
+        */
         // add your Realm App Id to the .env.local file
         const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
         const app = new Realm.App({ id: REALM_APP_ID });
@@ -23,24 +25,27 @@ const ProfileForm = () => {
               const userProfile = await user.functions.getProfile(email);
               console.log(userProfile);
               setProfile(() => userProfile);
+              console.log(`User profile for ${email}: ${JSON.stringify(profile)}`);
 
             } catch (error) {
               console.error(error);
             }
         }
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (fieldName, event) => {
+/*        
         if (e.target.name === 'image') {
             setProfile({
               ...profile,
-              image: e.target.files[0],
+              image: event.target.files[0],
             });
         } else {
-            setProfile({
+*/       console.log("Updating field: ", fieldName);
+         setProfile({
               ...profile,
-              [e.target.name]: e.target.value,
+              [fieldName]: event.target.value,
             });
-        }
+//        }
     };
         
         
@@ -67,17 +72,7 @@ const ProfileForm = () => {
         */
     
         const data = {
-          first: event.target.first.value,
-          last: event.target.last.value,
-          gender: event.target.gender.value,
-          skinTone: event.target.skinTone.value,
-          heritage: event.target.heritage.value,
-          favColor: event.target.favColor.value,
-          preferredStyle: event.target.preferredStyle.value,
-          age: event.target.age.value,
-          pictureFile: event.target.pictureFile.value,
-          pantSize: event.target.pantSize.value,
-          shirtSize: event.target.shirtSize.value,
+          profile,
           email: email
         }
                     
@@ -120,37 +115,52 @@ const ProfileForm = () => {
         }
     }
 
-return (
-    <div className="w-full max-w-xs">
+useEffect(() => {
+    console.log("useEffect: updating form");
+    generateForm(profile)
+}, [profile]);
+
+const generateForm = (lProfile) => {
+    console.log("generateForm: ", lProfile);
+  
+    return (
+        <div className="w-full max-w-xs">
         <form name="loginForm" onSubmit={getFormValues}>
-            <FormElement htmlFor="email" label="Email"/>
+            <FormElement htmlFor="email" label="Email" onChangeHandler={(event) => setEmail(event.target.value)}/>
             <div className="flex items-center justify-between">
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                 Login
                 </button>
             </div>
         </form>
-        <form className="pt-20" name="profileForm" onSubmit={handleSubmit}>
-            <FormElement htmlFor="first" label="First Name" value={profile ? profile.first : undefined}/>
-            <FormElement htmlFor="last" label="Last Name" value={profile ? profile.last : undefined}/>
-            <FormElement htmlFor="gender" label="Gender" value={profile ? profile.gender: undefined}/>
-            <FormElement htmlFor="skinTone" label="Skin Tone" value={profile ? profile.skinTone : undefined}/>
-            <FormElement htmlFor="heritage" label="Heritage" value={profile ? profile.heritage: undefined}/>
-            <FormElement htmlFor="favColor" label="Favorite Color" value={profile ? profile.favColor : undefined}/>
-            <FormElement htmlFor="preferredStyle" label="Preferred Style" value={profile ? profile.preferredStyle : undefined}/>
-            <FormElement htmlFor="age" label="Age" value={profile ? profile.age : undefined}/>
-            <FormElement htmlFor="pictureFile" label="Picture File" value={profile.pictureFile ? profile.pictureFile : undefined}/>
-            <FormElement htmlFor="pantSize" label="Pant Size" value={profile.pantSize ? profile.pantSize : undefined}/>
-            <FormElement htmlFor="shirtSize" label="Shirt Size" value={profile.shirtSize ? profile.shirtSize : undefined}/>
+   <form className="pt-20" name="profileForm" onSubmit={handleSubmit}>
+        <FormElement htmlFor="first" label="First Name" value={lProfile ? lProfile.first : undefined} onChangeHandler={(event) => handleInputChange("first", event)}/>
+        <FormElement htmlFor="last" label="Last Name" value={lProfile ? lProfile.last : undefined} onChangeHandler={(event) => handleInputChange("last", event)}/>
+        <FormElement htmlFor="gender" label="Gender" value={lProfile ? lProfile.gender: undefined} onChangeHandler={(event) => handleInputChange("gender", event)}/>
+        <FormElement htmlFor="skinTone" label="Skin Tone" value={lProfile ? lProfile.skinTone : undefined} onChangeHandler={(event) => handleInputChange("skinTone", event)}/>
+        <FormElement htmlFor="heritage" label="Heritage" value={lProfile ? lProfile.heritage: undefined} onChangeHandler={(event) => handleInputChange("heritage", event)}/>
+        <FormElement htmlFor="favColor" label="Favorite Color" value={lProfile ? lProfile.favColor : undefined} onChangeHandler={(event) => handleInputChange("favColor", event)}/>
+        <FormElement htmlFor="preferredStyle" label="Preferred Style" value={lProfile ? lProfile.preferredStyle : undefined} onChangeHandler={(event) => handleInputChange("preferredStyle", event)}/>
+        <FormElement htmlFor="age" label="Age" value={lProfile ? lProfile.age : undefined} onChangeHandler={(event) => handleInputChange("age", event)}/>
+        <FormElement htmlFor="pictureFile" label="Picture File" value={lProfile.pictureFile ? lProfile.pictureFile : undefined} onChangeHandler={(event) => handleInputChange("pictureFile", event)}/>
+        <FormElement htmlFor="pantSize" label="Pant Size" value={lProfile.pantSize ? lProfile.pantSize : undefined} onChangeHandler={(event) => handleInputChange("pantSize", event)}/>
+        <FormElement htmlFor="shirtSize" label="Shirt Size" value={lProfile.shirtSize ? lProfile.shirtSize : undefined} onChangeHandler={(event) => handleInputChange("shirtSize", event)}/>
 
-            <div className="flex items-center justify-between">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                Submit
-                </button>
-            </div>
-        </form>
+        <div className="flex items-center justify-between">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            Submit
+            </button>
+        </div>
+    </form>
     </div>
-)
+    )
+}
+
+return (
+    
+            generateForm(profile)
+    )
+
 };
 
 export default ProfileForm;

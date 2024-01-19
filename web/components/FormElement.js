@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const FormElement = ({label, htmlFor, value}) => {
+const FormElement = ({label, htmlFor, value, onChangeHandler}) => {
 
-    const [inputValue, setInputValue] = useState(value);
+    const [inputValue, setInputValue] = useState("");
 
     const onInputChange = (e) => {
-        setInputValue(e.target.value);
+        onChangeHandler(e);
     }
+
+    useEffect(() => {
+        setInputValue(value)
+    }, [value]);
 
     return (
         <div className="mb-4">

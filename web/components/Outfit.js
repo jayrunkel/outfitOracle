@@ -20,11 +20,10 @@ const Outfit = ({ outfit }) => {
           </button>
         </div>
         <div className="px-5 py-3">
-          <h3 className="text-gray-700 uppercase">{outfit.productDisplayName || "No Outfit Name"}</h3>
-          <div>
-            {outfit.description || "No Description"}
+          <h3 className="text-gray-700 uppercase">{outfit.outfit_array.outfit_name || "No Outfit Name"}</h3>
+          <div className="text-sm">
+            {outfit.outfit_array.gpt_response || "No Description"}
           </div>
-          <span className="text-gray-500 mt-2">${outfit.price || "0.00"}</span>
         </div>
       </div>
     </Link>
