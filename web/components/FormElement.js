@@ -20,7 +20,7 @@ const FormElement = ({label, htmlFor, value, onChangeHandler}) => {
                 }
             </label>    
             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                onChange={onInputChange}
+                onChange={onInputChange} autoComplete="off"
                 id={htmlFor} type="text" value={inputValue ? inputValue : undefined} placeholder={label} required/>
         </div>
     )

@@ -3,6 +3,7 @@ import Container from "../../components/Container";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import ProfileForm from "../../components/ProfileForm";
+import React from "react";
 
 export default function Home() {
 

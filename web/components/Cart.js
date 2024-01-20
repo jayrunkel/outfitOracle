@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import Image from "next/image";
+import React from "react";
 import CartItem from "./CartItem";
 //import { useCartContext } from "../context/cartContext";
 import {
   XIcon,
-  PlusCircleIcon,
   ArrowNarrowRightIcon,
 } from "@heroicons/react/outline";
 

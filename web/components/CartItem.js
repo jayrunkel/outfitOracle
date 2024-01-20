@@ -2,11 +2,10 @@ import React from "react";
 import Image from "next/image";
 import {
     XIcon,
-    PlusCircleIcon,
-    ArrowNarrowRightIcon,
+    PlusCircleIcon
   } from "@heroicons/react/outline";
 
-const CartItem = ({productId, product}) => {
+const CartItem = ({product}) => {
     return (
         <div className="flex justify-between mt-6">
             <div className="flex">

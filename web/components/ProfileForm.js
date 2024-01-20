@@ -1,11 +1,15 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import FormElement from "./FormElement";
 import * as Realm from "realm-web";
+import CustomFileSelector from "./CustomFileSelect";
+import ImagePreview from "./ImagePreview";
 //import axios from 'axios';
 
 const ProfileForm = () => {
     const [profile, setProfile] = useState({});
     const [email, setEmail] = useState("");
+    const [images, setImages] = useState([]); //File[]
 
     const getFormValues = async (event) => {
         event.preventDefault();
@@ -27,10 +31,18 @@ const ProfileForm = () => {
               setProfile(() => userProfile ? userProfile : {});
               console.log(`User profile for ${email}: ${JSON.stringify(profile)}`);
 
-            } catch (error) {
+        } catch (error) {
               console.error(error);
-            }
+        }    
+    }
+
+    const handleFileSelected = (e) => {
+        if (e.target.files) {
+          //convert `FileList` to `File[]`
+          const _files = Array.from(e.target.files);
+          setImages(_files);
         }
+    };
 
     const handleInputChange = (fieldName, event) => {
 /*        
@@ -73,7 +85,8 @@ const ProfileForm = () => {
     
         const data = {
           ...profile,
-          email: email
+          email,
+          images
         }
                     
         // Send the data to the server in JSON format.
@@ -118,42 +131,51 @@ const ProfileForm = () => {
 useEffect(() => {
     console.log("useEffect: updating form");
     generateForm(profile)
-}, [profile]);
+}, [profile, images]);
 
 const generateForm = (lProfile) => {
     console.log("generateForm: ", lProfile);
   
     return (
-        <div className="w-full max-w-xs">
-        <form name="loginForm" onSubmit={getFormValues}>
-            <FormElement htmlFor="email" label="Email" onChangeHandler={(event) => setEmail(event.target.value)}/>
-            <div className="flex items-center justify-between">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                Login
-                </button>
+        <div className="w-full">
+            <div className="w-full">
+                <form name="loginForm" onSubmit={getFormValues}>
+                    <FormElement htmlFor="email" label="Email" onChangeHandler={(event) => setEmail(event.target.value)}/>
+                    <div className="flex items-center justify-between">
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                       Login
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
-   <form className="pt-20" name="profileForm" onSubmit={handleSubmit}>
-        <FormElement htmlFor="first" label="First Name" value={lProfile ? lProfile.first : undefined} onChangeHandler={(event) => handleInputChange("first", event)}/>
-        <FormElement htmlFor="last" label="Last Name" value={lProfile ? lProfile.last : undefined} onChangeHandler={(event) => handleInputChange("last", event)}/>
-        <FormElement htmlFor="gender" label="Gender" value={lProfile ? lProfile.gender: undefined} onChangeHandler={(event) => handleInputChange("gender", event)}/>
-        <FormElement htmlFor="skinTone" label="Skin Tone" value={lProfile ? lProfile.skinTone : undefined} onChangeHandler={(event) => handleInputChange("skinTone", event)}/>
-        <FormElement htmlFor="heritage" label="Heritage" value={lProfile ? lProfile.heritage: undefined} onChangeHandler={(event) => handleInputChange("heritage", event)}/>
-        <FormElement htmlFor="favColor" label="Favorite Color" value={lProfile ? lProfile.favColor : undefined} onChangeHandler={(event) => handleInputChange("favColor", event)}/>
-        <FormElement htmlFor="preferredStyle" label="Preferred Style" value={lProfile ? lProfile.preferredStyle : undefined} onChangeHandler={(event) => handleInputChange("preferredStyle", event)}/>
-        <FormElement htmlFor="age" label="Age" value={lProfile ? lProfile.age : undefined} onChangeHandler={(event) => handleInputChange("age", event)}/>
-        <FormElement htmlFor="pictureFile" label="Picture File" value={lProfile.pictureFile ? lProfile.pictureFile : undefined} onChangeHandler={(event) => handleInputChange("pictureFile", event)}/>
-        <FormElement htmlFor="pantSize" label="Pant Size" value={lProfile.pantSize ? lProfile.pantSize : undefined} onChangeHandler={(event) => handleInputChange("pantSize", event)}/>
-        <FormElement htmlFor="shirtSize" label="Shirt Size" value={lProfile.shirtSize ? lProfile.shirtSize : undefined} onChangeHandler={(event) => handleInputChange("shirtSize", event)}/>
-
-        <div className="flex items-center justify-between">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-            Submit
-            </button>
+            <div className="grid grid-cols-2 gap-10">
+                <form className="pt-20" name="profileForm" onSubmit={handleSubmit}>
+                    <FormElement htmlFor="first" label="First Name" value={lProfile ? lProfile.first : undefined} onChangeHandler={(event) => handleInputChange("first", event)}/>
+                    <FormElement htmlFor="last" label="Last Name" value={lProfile ? lProfile.last : undefined} onChangeHandler={(event) => handleInputChange("last", event)}/>
+                    <FormElement htmlFor="gender" label="Gender" value={lProfile ? lProfile.gender: undefined} onChangeHandler={(event) => handleInputChange("gender", event)}/>
+                    <FormElement htmlFor="skinTone" label="Skin Tone" value={lProfile ? lProfile.skinTone : undefined} onChangeHandler={(event) => handleInputChange("skinTone", event)}/>
+                    <FormElement htmlFor="heritage" label="Heritage" value={lProfile ? lProfile.heritage: undefined} onChangeHandler={(event) => handleInputChange("heritage", event)}/>
+                    <FormElement htmlFor="favColor" label="Favorite Color" value={lProfile ? lProfile.favColor : undefined} onChangeHandler={(event) => handleInputChange("favColor", event)}/>
+                    <FormElement htmlFor="preferredStyle" label="Preferred Style" value={lProfile ? lProfile.preferredStyle : undefined} onChangeHandler={(event) => handleInputChange("preferredStyle", event)}/>
+                    <FormElement htmlFor="age" label="Age" value={lProfile ? lProfile.age : undefined} onChangeHandler={(event) => handleInputChange("age", event)}/>
+                    <FormElement htmlFor="pictureFile" label="Picture File" value={lProfile.pictureFile ? lProfile.pictureFile : undefined} onChangeHandler={(event) => handleInputChange("pictureFile", event)}/>
+                    <FormElement htmlFor="pantSize" label="Pant Size" value={lProfile.pantSize ? lProfile.pantSize : undefined} onChangeHandler={(event) => handleInputChange("pantSize", event)}/>
+                    <FormElement htmlFor="shirtSize" label="Shirt Size" value={lProfile.shirtSize ? lProfile.shirtSize : undefined} onChangeHandler={(event) => handleInputChange("shirtSize", event)}/>
+                    <CustomFileSelector accept="image/png, image/jpeg" onChange={handleFileSelected}/>
+                    <div className="flex items-center justify-between">
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Submit
+                        </button>
+                    </div>
+                </form>
+                <div className="mb-4 pt-20">
+                    <label id="profileImageLabel" className="block text-gray-700 text-sm font-bold mb-2">Profile Images</label>
+                    <ImagePreview images={images}/>
+                </div>
+            </div>
         </div>
-    </form>
-    </div>
     )
+        
 }
 
 return (

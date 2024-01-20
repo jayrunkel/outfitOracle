@@ -20,11 +20,11 @@ export default async function handler(req, res) {
     try {
       const user = await app.logIn(credentials);
       formSaveResult = await user.functions.saveProfile(body.email, body);
-      res.status(200).json({ data: `${body.first} ${body.last}` });
+      res.status(200).json({formSaveResult: formSaveResult});
 
     } catch (error) {
       console.error(error);
       res.status(400).json(error);
     }
-  };
+  }
 
