@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FormElement from "./FormElement";
 import * as Realm from "realm-web";
-import axios from 'axios';
+//import axios from 'axios';
 
 const ProfileForm = () => {
     const [profile, setProfile] = useState({});
@@ -24,7 +24,7 @@ const ProfileForm = () => {
               console.log("getting profile for email: ", email);
               const userProfile = await user.functions.getProfile(email);
               console.log(userProfile);
-              setProfile(() => userProfile);
+              setProfile(() => userProfile ? userProfile : {});
               console.log(`User profile for ${email}: ${JSON.stringify(profile)}`);
 
             } catch (error) {
@@ -72,7 +72,7 @@ const ProfileForm = () => {
         */
     
         const data = {
-          profile,
+          ...profile,
           email: email
         }
                     
