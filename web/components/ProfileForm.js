@@ -4,6 +4,9 @@ import FormElement from "./FormElement";
 import * as Realm from "realm-web";
 import CustomFileSelector from "./CustomFileSelect";
 import ImagePreview from "./ImagePreview";
+import process from "process";
+//import axios from "axios";
+//import FormData from "formdata";
 //import axios from 'axios';
 
 const ProfileForm = () => {
@@ -82,50 +85,53 @@ const ProfileForm = () => {
         formDataToSend.append('age', event.target.age.value);
         formDataToSend.append('email', email);
         */
-    
+    /*
         const data = {
           ...profile,
           email,
           images
         }
-                    
-        // Send the data to the server in JSON format.
-        const JSONdata = JSON.stringify(data)
-    
+    */
+
+        const formData = new FormData();
+        Object.keys(profile).forEach((field) => {
+            formData.append(field, profile[field]);
+        });
+        formData.append("images", images[0]);
+        formData.append("image", images[0].name);
+        formData.append("email", email);
+
         // API endpoint where we send form data.
         const endpoint = '/api/saveProfileForm'
     
         // Form the request for sending data to the server.
         const options = {
           // The method is POST because we are sending data.
+          mode: 'no-cors',
           method: 'POST',
           // Tell the server we're sending JSON.
-          headers: {
-            'Content-Type': 'application/json',
-          },
+//          headers: {
+//            'Content-Type': 'application/json',
+//          },
           // Body of the request is the JSON data we created above.
-          body: JSONdata
+          body: formData
         }
-        
-        console.log("sending data: ", JSONdata);
+        console.log("endpoint ", endpoint);
+        console.log("post options ", options);
+        //console.log("sending data: ", formData);
         try {
             // Make an API call to the route you created in step 2
 
-            const response = fetch(endpoint, options)
-            /*
-            const response = await axios({
-                method: "post",
-                url: "/api/saveProfileForm",
-                data: formDataToSend,
-                headers: { "Content-Type": "multipart/form-data" },
-              });
-              */
+            const response = await fetch(endpoint, options)
+            //const response = await axios.post(endpoint, formData, {mode: 'no-cors'});
+            
             console.log(response.data);
             alert(`Profile saved`)
         }
         catch (error) {
             console.error('Error uploading image:', error);
         }
+              
     }
 
 useEffect(() => {

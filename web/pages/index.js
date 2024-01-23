@@ -1,4 +1,5 @@
 import Head from "next/head";
+import React from "react";
 import { useState, useEffect } from "react";
 import * as Realm from "realm-web";
 import Category from "../components/Category";
