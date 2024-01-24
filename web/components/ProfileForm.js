@@ -13,6 +13,7 @@ const ProfileForm = () => {
     const [profile, setProfile] = useState({});
     const [email, setEmail] = useState("");
     const [images, setImages] = useState([]); //File[]
+    const [imageBase64, setImageBase64] = useState("");
 
     const getFormValues = async (event) => {
         event.preventDefault();
@@ -44,6 +45,10 @@ const ProfileForm = () => {
           //convert `FileList` to `File[]`
           const _files = Array.from(e.target.files);
           setImages(_files);
+
+          convertFileToBase64(_files[0])
+             .then(result => setImageBase64(result))
+             .catch(error => console.error(error));
         }
     };
 
@@ -63,7 +68,17 @@ const ProfileForm = () => {
 //        }
     };
         
-        
+    function convertFileToBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          // Typescript users: use following line
+          // reader.onload = () => resolve(reader.result as string);
+          reader.onerror = reject;
+        });
+    }
+    
     const handleSubmit = async (event) => {
         // Stop the form from submitting and refreshing the page.
         event.preventDefault()
@@ -85,14 +100,14 @@ const ProfileForm = () => {
         formDataToSend.append('age', event.target.age.value);
         formDataToSend.append('email', email);
         */
-    /*
+      
         const data = {
           ...profile,
           email,
-          images
+          imageBase64
         }
-    */
 
+        /*
         const formData = new FormData();
         Object.keys(profile).forEach((field) => {
             formData.append(field, profile[field]);
@@ -100,7 +115,7 @@ const ProfileForm = () => {
         formData.append("images", images[0]);
         formData.append("image", images[0].name);
         formData.append("email", email);
-
+        */
         // API endpoint where we send form data.
         const endpoint = '/api/saveProfileForm'
     
@@ -110,11 +125,11 @@ const ProfileForm = () => {
           mode: 'no-cors',
           method: 'POST',
           // Tell the server we're sending JSON.
-//          headers: {
-//            'Content-Type': 'application/json',
-//          },
+          headers: {
+            'Content-Type': 'application/json',
+          },
           // Body of the request is the JSON data we created above.
-          body: formData
+          body: JSON.stringify(data)
         }
         console.log("endpoint ", endpoint);
         console.log("post options ", options);
