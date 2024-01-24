@@ -1,18 +1,24 @@
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import * as Realm from "realm-web";
-import Link from "next/link";
+//import * as Realm from "realm-web";
+//import Link from "next/link";
 import { ArrowNarrowRightIcon } from "@heroicons/react/outline";
+import ImagePreview from "./ImagePreview";
+import CustomFileSelector from "./CustomFileSelect";
+//import process from "process";
 
 const Hero = () => {
   const router = useRouter();
-  const [selectedImageId, setSelectedImageId] = useState("");
-  const [selectedImageSearchId, setSelectedImageSearchId] = useState("");
-  const [selectedImageLink, setSelectedImageLink] = useState("");
-  const [prompt, setPrompt] = useState("");
-  const [images, setImages] = useState([]);
+  //const [selectedImageId, setSelectedImageId] = useState("");
+  //const [selectedImageSearchId, setSelectedImageSearchId] = useState("");
+  //const [selectedImageLink, setSelectedImageLink] = useState("");
+  //const [prompt, setPrompt] = useState("");
+  //const [images, setImages] = useState([]);
+  const [image, setImage] = useState("");
+  const [imageBase64, setImageBase64] = useState("");
 
+  /*
   async function getImagesFromDB() {
     // add your Realm App Id to the .env.local file
     const REALM_APP_ID = process.env.NEXT_PUBLIC_REALM_APP_ID;
@@ -26,10 +32,24 @@ const Hero = () => {
       console.error(error);
     }
   }
+  */
 
+  function convertFileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      // Typescript users: use following line
+      // reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+    });
+  }
+
+  /*
   useEffect(() => {
     getImagesFromDB()
   }, []);
+  */
 
   const handleSubmit = async (event) => {
     // Stop the form from submitting and refreshing the page.
@@ -39,9 +59,12 @@ const Hero = () => {
 
     const data = {
       prompt: event.target.prompt.value,
+      image: imageBase64,
+      //email: "jay.runkel@mongodb.com",
+      //profile: profile
       }
-      //image: selectedImageId,
-      //email: "jay.runkel@mongodb.com"
+      
+      
 
           
     // Send the data to the server in JSON format.
@@ -79,13 +102,13 @@ const Hero = () => {
 
         console.log(response.data);
         
-        //alert(`Presenting search ID data: ${response.data}`)
-        alert(`[hack] Presenting search ID data: ${selectedImageSearchId}`)
+        alert(`Presenting search ID data: ${response.data}`)
+        //alert(`[hack] Presenting search ID data: ${selectedImageSearchId}`)
       
 
     router.push({
-      //pathname: `/products/aiEngine/${response.data}`
-      pathname: `/products/aiEngine/${selectedImageSearchId}`
+      pathname: `/products/aiEngine/${response.data}`
+      //pathname: `/products/aiEngine/${selectedImageSearchId}`
       //pathname: `/products/aiEngine/20240117145550948214`
       });
     }
@@ -95,14 +118,27 @@ const Hero = () => {
   }
 
   const handleImageChange = (e) => {
-    console.log(JSON.stringify(e.target.value));
-    const [image, link, searchId] = e.target.value.split("|");
-    console.log(image);
-    console.log(link);
-    console.log(searchId);
-    setSelectedImageId(image);
-    setSelectedImageLink(link);
-    setSelectedImageSearchId(searchId);
+    if (e.target.files) {
+      //convert `FileList` to `File[]`
+      const _files = Array.from(e.target.files);
+      const filesCopy = _files.slice(0,1);
+      setImage(filesCopy[0]);
+      
+      convertFileToBase64(filesCopy[0])
+         .then(result => setImageBase64(result))
+         .catch(error => console.error(error));
+    }
+
+
+
+    // console.log(JSON.stringify(e.target.value));
+    // const [image, link, searchId] = e.target.value.split("|");
+    // console.log(image);
+    // console.log(link);
+    // console.log(searchId);
+    // setSelectedImageId(image);
+    // setSelectedImageLink(link);
+    // setSelectedImageSearchId(searchId);
   };
 
   return ( // overflow-hidden bg-cover bg-center relative
@@ -128,18 +164,7 @@ const Hero = () => {
              <label className="block text-gray-700 text-sm font-bold mt-4 mb-0" htmlFor="image">
                Provide Sample Outfit Picture
              </label>
-             <select id="imageSelect" 
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={selectedImageId + '|' + selectedImageLink + '|' + selectedImageSearchId}
-                onChange={handleImageChange}>
-                <option value="">Select your preferred look...</option>
-                {
-                  images.map((image) => 
-                    <option key={image._id} value={image._id + "|" + image.image_link + "|" + image.searchID}>{image.image_name}</option>
-                  )
-                }
-              </select>                
-            
+             <CustomFileSelector accept="image/png, image/jpeg" onChange={handleImageChange}/>
           <div className="">
         <div className="px-10 max-w-xl">
           
@@ -154,20 +179,11 @@ const Hero = () => {
       </div>
         </div>
         </form>          
-        <Image
-          src={selectedImageLink}
-          alt="Outfit Image"
-          width="300"
-          height="500"
-          //layout="fill"
-          //objectFit="cover"
-          //className="absolute z-0"
-        />
+        <ImagePreview images={[image ? image : null]} className="w-300 h-300"/>
       </div>
-      </div>
-      
-    </div>
+    </div>  
+  </div>
   );
-};
-
+}; 
+   
 export default Hero;
