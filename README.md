@@ -94,3 +94,13 @@ endpoint URL: http://127.0.0.1:5000
 | /upload      | Upload Binary Image to MongoDB and asynchronously Vectorize                  | POST: Multipart | file: <upload file>               | {<br>'_id'  <br>'image_name'<br>} |
 | /image/<_id> | image_binary that's able to be embedded into html using <img> tags           | GET             |                                   | <image binary>                    |
 | /prompt      | Send a prompt to GPT, receive a searchId back to look up outfit suggestions. | POST: JSON      | {<br>prompt: ""<br>image: ""<br>} | {<br>'searchId'<br>}              |
+
+## Install User Interface
+
+1. cd ./web
+2. npm install
+3. edit .env.local 
+4. npm run dev
+
+
+[Website](http://localhost:3000)

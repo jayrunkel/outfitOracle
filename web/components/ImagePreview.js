@@ -12,17 +12,32 @@ type Props =
 
 
 const ImagePreview = ({ images }) => {
-    return (
-        <div className="h-500">
-            <div className="grid grid-cols-12 gap-2 my-2">
-                {images.map((image) => {
+
+    const buildImageDivs = (pictures) => {
+        console.log({pictures: pictures});
+        if (typeof pictures === 'undefined' || pictures === null || pictures.length === 0) 
+           return null;
+        else return (
+            pictures.map((image) => {
+                console.log({image: image});
+                if (typeof image !== "undefined" && image !== null) {
                     const src = URL.createObjectURL(image);
                     return (
                         <div className="relative aspect-video col-span-4" key={image.name}>
                             <Image src={src} alt={image.name} className="object-cover" height="120" width="100" />
                         </div>
                     );
-                })}
+                }
+            })
+        )
+        }
+
+    return (
+        <div className="h-500">
+            <div className="grid grid-cols-12 gap-2 my-2">
+             {
+                 buildImageDivs(images)   
+            }
             </div>
         </div>
     );
