@@ -71,17 +71,16 @@ const Hero = () => {
     const JSONdata = JSON.stringify(data)
 
     // API endpoint where we send form data.
-    const endpoint = 'http://127.0.0.1:5000/prompt'
+    const endpoint = '/api/sendReqToAIEngine';
 
     // Form the request for sending data to the server.
     const options = {
       // The method is POST because we are sending data.
       method: 'POST',
       // Tell the server we're sending JSON.
-      mode: 'no-cors',
-      headers: {
+      headers: new Headers ({
         'Content-Type': 'application/json'
-            },
+        }),
       // Body of the request is the JSON data we created above.
       body: JSONdata
     }
@@ -100,14 +99,15 @@ const Hero = () => {
           });
         */
 
-        console.log(response.data);
+        const resBody = await response.json();
+        console.log(resBody);
         
-        alert(`Presenting search ID data: ${response.data}`)
+        alert(`Presenting search ID data: ${resBody}`)
         //alert(`[hack] Presenting search ID data: ${selectedImageSearchId}`)
       
 
     router.push({
-      pathname: `/products/aiEngine/${response.data}`
+      pathname: `/products/aiEngine/${resBody.searchID}`
       //pathname: `/products/aiEngine/${selectedImageSearchId}`
       //pathname: `/products/aiEngine/20240117145550948214`
       });
