@@ -81,7 +81,7 @@ def prompt(data):
 
     logging.info('Sending a test completion job')
 
-    json_data = '''
+    json_data = '''```json
       //This is an example template for the JSON object that we need to pass through MongoDB that you should return and are not default values.
       //Order the outfit_articles from head to toe. THIS IS IMPORTANT! Ensure customerprofile is included in the attribute_extract object.
       // DO NOT INCLUE any COMMENT BLOCKS THAT BREAKS JSON!!!. ENSURE IT IS VALID JSON. 
@@ -109,7 +109,7 @@ def prompt(data):
           },
           //outfit 2, 3, etc
       ]
-    }
+    }```
     '''
 
     # gpt_instructions = "Give me a JSON form of an array of clothing based on the following prompt: "

@@ -1,16 +1,12 @@
-import os
-import openai
-import json
-import pprint
-import pymongo
 import logging
-import requests
-import uuid
 
 logging.basicConfig(level=logging.INFO)
 
+# add your IP to whitelist https://portal.azure.com/#@mongodb0.onmicrosoft.com/resource/subscriptions/ddff37eb-831c-4e1b-ae37-19af67c300e7/resourceGroups/SA_West_RG/providers/Microsoft.CognitiveServices/accounts/SAWestVisionSandbox/accessControl
 
 # send a base64 image to ms vision api to get dense captions to images
+
+
 def get_dense_captions(image):
     import requests
     import json
@@ -29,11 +25,18 @@ def get_dense_captions(image):
         "Ocp-Apim-Subscription-Key": subscription_key  # Replace with your actual key
     }
     data = {
-        "url": "https://www.instyle.com/thmb/gVqVKBCTh3H5-Gr6T4Akye25XwU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/springdatenightoutfits-lead-86de049c32f141df86659b8cada81cad.jpg"
+        "url": "http://gucci.scnz.co/image/"+image
     }
 
     response = requests.post(url, params=params, headers=headers, json=data)
-    print(response.json())
+
+    # concatenate the captions, denseCaptionsResult.values.text
+    captions = ""
+    for caption in response.json()["denseCaptionsResult"]["values"]:
+        if caption["confidence"] >= .7:
+            captions += caption["text"] + ". "
+
+    print(captions)
 
 
-get_dense_captions("111")
+get_dense_captions("65a800e2c1f235c036d65f78")

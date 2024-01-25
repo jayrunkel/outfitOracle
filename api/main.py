@@ -3,6 +3,7 @@ from sentence_transformers import SentenceTransformer
 from flask import Flask, Response, request, jsonify
 from PIL import Image
 from vectorize import vectorize
+from search_progress import search_status
 import prompt
 import uuid
 from bson import binary, ObjectId
@@ -11,6 +12,7 @@ import os
 import io
 import pymongo
 import datetime
+# kill -9 $(lsof -t -i:5000)
 
 app = Flask(__name__)
 
@@ -119,8 +121,13 @@ def get_image(_id):
 
 @app.route("/prompt", methods=["POST"])
 def send_prompt():
-    data = request.get_json()
     return jsonify(prompt.prompt(request))
+
+
+@app.route("/search_progress", methods=["POST"])
+def search_progress():
+    data = request.get_json()
+    return jsonify(search_status(userPrompt=data['prompt'], search_Id=data['search_Id'], number=data['number']))
 
 
 if __name__ == '__main__':

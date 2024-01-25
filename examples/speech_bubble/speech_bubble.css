@@ -1,0 +1,40 @@
+#parentContainer {
+    width: 800px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.owlImage {
+    width: 50%;
+    height: auto;
+}
+
+#bubble {
+    position: relative;
+    margin-left: 20px;
+    width: calc(50%-20px);
+}
+
+#canvas1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#speechText {
+    position: absolute;
+    top: 5px;
+    left: calc(400px/10);
+    padding: 0px;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Courier New',
+        monospace;
+    font-size: 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    min-height: calc(400px/20);
+    max-height: 390px;
+    max-width: 340px;
+    overflow: hidden;
+}

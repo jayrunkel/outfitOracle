@@ -2,9 +2,10 @@ import os
 import openai
 import pprint
 openai.api_key = "45eefc80e0914e64995ed91c3c7cf175"
-openai.api_base = "https://outfitoracle.openai.azure.com/" # your endpoint should look like the following https://YOUR_RESOURCE_NAME.openai.azure.com/
+# your endpoint should look like the following https://YOUR_RESOURCE_NAME.openai.azure.com/
+openai.api_base = "https://outfitoracle.openai.azure.com/"
 openai.api_type = 'azure'
-openai.api_version = "2023-09-15-preview" # this might change in the future
+openai.api_version = "2023-09-15-preview"  # this might change in the future
 
 
 # Generate image for the outfit based on "dalle_prompt"
@@ -17,13 +18,9 @@ openai.api_version = "2023-09-15-preview" # this might change in the future
 
 def generate_dalle(dalle_prompt):
     response = openai.Image.create(
-        prompt= dalle_prompt,
+        prompt=dalle_prompt,
         size='1024x1024',
         n=1
-    
+
     )
     return response["data"][0]["url"]
-
-
-
-

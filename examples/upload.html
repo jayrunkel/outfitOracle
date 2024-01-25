@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <!-- Image selection form -->
+        <input type="file" id="imageInput" accept="image/*">
+
+        <script>
+  let base64String = ""; // Variable to store Base64 string
+
+  document.getElementById('imageInput').addEventListener('change', function() {
+    const reader = new FileReader();
+
+    reader.onload = function() {
+      base64String = reader.result.replace("data:", "")
+          .replace(/^.+,/, ""); // Extracts Base64 encoding
+      console.log(base64String); // Log Base64 string (or handle it as needed)
+    }
+
+    reader.readAsDataURL(this.files[0]); // Convert image to Base64
+  });
+</script>
+
+    </body>
+</html>
