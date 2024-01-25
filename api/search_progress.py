@@ -9,14 +9,12 @@ import re
 import threading
 
 
-def search_status(userPrompt, userProfile, imageName, search_Id, number):
+def search_status(userPrompt, customerId, imageName, search_Id, number):
     openai.api_key = "45eefc80e0914e64995ed91c3c7cf175"
     # your endpoint should look like the following https://YOUR_RESOURCE_NAME.openai.azure.com/
     openai.api_base = "https://outfitoracle.openai.azure.com/"
     openai.api_type = 'azure'
     openai.api_version = "2023-09-15-preview"  # this might change in the future
-
-    userProfile = json.dumps(userProfile)
 
     logging.basicConfig(level=logging.INFO)
 
@@ -39,6 +37,12 @@ def search_status(userPrompt, userProfile, imageName, search_Id, number):
     if search_result:
         return {"status": "complete", "search_Id": search_Id, "message": "All done! I can't wait to show you what I picked out for you!"}
     else:
+        collection = db["customerProfiles"]
+
+        # check if user exists in collection
+
+        userProfile = json.dumps(userProfile)
+
         prompt = f"""
         You are the Outfit Oracle, an owl who happens to be a fashion expert who helps people find the perfect outfit for any occasion. \n
         You're currently hard at work and want to keep your client entertained. \n
