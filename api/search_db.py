@@ -41,7 +41,7 @@ def search_db(data):
             description=outfit_attributes['gpt_response']
         )'''
 
-        print(prefilters)
+        # print(prefilters)
 
         for attribute in outfit_attributes['outfit_articles']:
             # Encode each outfit attribute array
