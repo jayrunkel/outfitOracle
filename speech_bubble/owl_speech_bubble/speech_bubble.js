@@ -1,4 +1,4 @@
-function drawBubble(ctx, width, height, birdHeight)
+function owl_drawBubble(ctx, width, height, birdHeight)
 {
     width=parseInt(width);
     height=parseInt(height);
@@ -53,9 +53,9 @@ function drawBubble(ctx, width, height, birdHeight)
 }
 
 
-function animateText(text, duration)
+function owl_animateText(text, duration)
 {
-    const speechText=document.getElementById('speechText');
+    const speechText=document.getElementById('owl_speechText');
     speechText.innerHTML=''; // Clear existing text
 
     // If duration is 0, display all characters in black
@@ -89,12 +89,12 @@ function animateText(text, duration)
 }
 
 
-function displayMessage()
+function owl_displayMessage(text, duration)
 {
-    var textArea=document.getElementById('textBox');
-    var speechText=document.getElementById('speechText');
-    var canvas=document.getElementById('canvas1');
-    var dimensions=calculateTextDimensions(textArea.value);
+    var textArea=text;
+    var speechText=document.getElementById('owl_speechText');
+    var canvas=document.getElementById('owl_canvas1');
+    var dimensions=owl_calculateTextDimensions(textArea);
     var birdHeight=400;
     var tailHeight=birdHeight/20;
     var tailWidth=tailHeight*1.5;
@@ -103,22 +103,18 @@ function displayMessage()
     speechText.style.width=parseInt(dimensions.width)+'px';
     speechText.style.height=parseInt(dimensions.height)+'px';
     speechText.style.paddingTop=parseInt(dimensions.topMargin)+'px';
-    speechText.innerText=textArea.value;
+    speechText.innerText=textArea;
 
+    duration=(duration==null||String(duration)==""||duration<0)? textArea.length/35:parseFloat(duration)
 
-
-
-    if (textArea.value.trim()!=='') {
+    if (textArea.trim()!=='') {
         if (canvas.getContext) {
             var ctx=canvas.getContext('2d');
             ctx.clearRect(0, 0, birdHeight, birdHeight);
-            drawBubble(ctx, parseInt(dimensions.width)+tailWidth+tailWidth, parseInt(dimensions.height)+tailHeight, birdHeight); // Adjust as needed
+            owl_drawBubble(ctx, parseInt(dimensions.width)+tailWidth+tailWidth, parseInt(dimensions.height)+tailHeight, birdHeight); // Adjust as needed
         }
 
-        var autoDurationChecked=document.getElementById('autoDuration').checked;
-        var durationInput=document.getElementById('duration');
-        var duration=autoDurationChecked? textArea.value.length/35:parseFloat(durationInput.value);
-        animateText(textArea.value, duration||0);
+        owl_animateText(textArea, duration||0);
     } else {
         if (canvas.getContext) {
             var ctx=canvas.getContext('2d');
@@ -129,10 +125,10 @@ function displayMessage()
 }
 
 // Function to calculate the dimensions of the text
-function calculateTextDimensions(text)
+function owl_calculateTextDimensions(text)
 {
-    const maxWidth=370; // Maximum width you want for the bubble
-    const maxHeight=390; // Maximum height you want for the bubble
+    const maxWidth=400-30; // Maximum width you want for the bubble
+    const maxHeight=400-10; // Maximum height you want for the bubble
     const charWidth=12; // Approximate width of a character
     const lineHeight=14; // Line height
     const minHeight=400/3; // Minimum height of the bubble
@@ -144,7 +140,8 @@ function calculateTextDimensions(text)
     }, 0);
 
     // calc top margin using (min height/line height ) - (number of lines) * line height
-    const topMargin=Math.max(0, (minHeight/lineHeight-lineCount)/2*lineHeight);
+    const fillSpace=(minHeight/lineHeight-lineCount)/2
+    const topMargin=((fillSpace*lineHeight)>(lineHeight*1.4))? fillSpace*lineHeight:0;
 
     // calculate the longest line by number of characters
     const longestLineLength=text.split("\n").reduce((max, line) =>
@@ -158,24 +155,26 @@ function calculateTextDimensions(text)
     return { width: actualWidth, height: actualHeight, topMargin: topMargin };
 }
 
+// only display if owl_textBox is found
+if (document.getElementById('owl_textBox')) {
+    // Event listeners and initial setup
+    document.getElementById('owl_autoDuration').addEventListener('change', function ()
+    {
+        var durationInput=document.getElementById('owl_duration');
+        durationInput.disabled=this.checked;
+        if (this.checked) {
+            durationInput.value='';
+        }
+    });
 
-// Event listeners and initial setup
-document.getElementById('autoDuration').addEventListener('change', function ()
-{
-    var durationInput=document.getElementById('duration');
-    durationInput.disabled=this.checked;
-    if (this.checked) {
-        durationInput.value='';
-    }
-});
+    window.onload=function ()
+    {
+        const urlParams=new URLSearchParams(window.location.search);
+        const text=urlParams.get('owl_text');
+        if (text) {
+            document.getElementById('owl_textBox').value=text;
+            owl_displayMessage(owl_displayMessage(document.getElementById('owl_textBox').value, document.getElementById('owl_duration').value));
+        }
 
-window.onload=function ()
-{
-    const urlParams=new URLSearchParams(window.location.search);
-    const text=urlParams.get('text');
-    if (text) {
-        document.getElementById('textBox').value=text;
-        displayMessage();
-    }
-
-};
+    };
+} 

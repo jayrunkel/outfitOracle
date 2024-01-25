@@ -18,7 +18,7 @@ def search_status(userPrompt, customerId, imageName, search_Id, number):
 
     logging.basicConfig(level=logging.INFO)
 
-    mongo_uri = "mongodb+srv://jscanzoni:Goe3CkqFgFcnqJFR@outfitoracle.6xgii.mongodb.net"
+    mongo_uri = "mongodb+srv://GucciGang:GucciGang@guccigang.jxnbg.mongodb.net/?retryWrites=true&w=majority"
     query = {"search_Id": search_Id}
     client = pymongo.MongoClient(mongo_uri)
     db = client['GucciGang']
@@ -40,8 +40,11 @@ def search_status(userPrompt, customerId, imageName, search_Id, number):
         collection = db["customerProfiles"]
 
         # check if user exists in collection
+        userProfile = collection.find_one({"customerId": customerId}, projection={
+                                          "images": 0, "imageBase64": 0})
 
         userProfile = json.dumps(userProfile)
+        print(userProfile)
 
         prompt = f"""
         You are the Outfit Oracle, an owl who happens to be a fashion expert who helps people find the perfect outfit for any occasion. \n
@@ -73,7 +76,7 @@ def search_status(userPrompt, customerId, imageName, search_Id, number):
             response = openai.Completion.create(
                 engine="outfit-oracle-gpt-turbo-instruct",
                 prompt=prompt,
-                max_tokens=700,
+                max_tokens=100,
             )
 
             response_text = response['choices'][0]['text'].strip()

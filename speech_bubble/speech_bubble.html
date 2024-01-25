@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./owl_speech_bubble/speech_bubble.css">
+    <title>Owl Speech Bubble Animation</title>
+  </head>
+  <body>
+
+    <div id="owl_parentContainer">
+      <img class="owl_owlImage" src="./owl_speech_bubble/owl.jpeg" alt="Owl">
+      <div id="owl_bubble">
+        <canvas id="owl_canvas1" width="400px" height="400px"></canvas>
+        <div id="owl_speechText"></div>
+      </div>
+    </div>
+    <!--
+    <textarea id="owl_textBox" rows="4"
+      placeholder="What does the owl say?"></textarea><br>
+    <label><input type="checkbox" id="owl_autoDuration" checked> Auto
+      Duration</label><br>
+    <input type="number" id="owl_duration" placeholder="Duration in seconds"
+      min="0"
+      disabled><br>
+    <button id="owl_hoot"
+      onclick="owl_displayMessage(document.getElementById('owl_textBox').value,document.getElementById('owl_duration').value)">Hoot</button>
+-->
+    <script src="./owl_speech_bubble/speech_bubble.js"></script>
+    <script>owl_displayMessage("hello");</script>
+
+  </body>
+</html>

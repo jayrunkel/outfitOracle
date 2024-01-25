@@ -120,7 +120,7 @@ def generate_filters(articles, description):
 
 def get_filters():
 
-    mongo_uri = "mongodb+srv://jscanzoni:Goe3CkqFgFcnqJFR@outfitoracle.6xgii.mongodb.net"
+    mongo_uri = "mongodb+srv://GucciGang:GucciGang@guccigang.jxnbg.mongodb.net/?retryWrites=true&w=majority"
     db = "GucciGang"
     collection = "OutfitOracle"
 
