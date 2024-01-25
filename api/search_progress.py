@@ -48,6 +48,8 @@ def search_status(userPrompt, userProfile, imageName, search_Id, number):
         if number == 1:
             prompt += f"""This is your first message to this client.. set a strong impression and let them know you understand their request. \n
             You must let them know that you're searching "MonghootDB" (a play on MongoDB) """
+        elif number == 3:
+            prompt += f"""This is message {number} to the client! Work in something like "we Gucci" or "it's all Gucci" where Gucci is in place of good or cool \n"""
         elif number >= 6:
             prompt += f"""This is message {number} to the client! you must let them know you're almost done and it will be just a bit longer. \n"""
         else:

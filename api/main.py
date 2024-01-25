@@ -127,7 +127,7 @@ def send_prompt():
 @app.route("/search_progress", methods=["POST"])
 def search_progress():
     data = request.get_json()
-    return jsonify(search_status(userPrompt=data['prompt'], search_Id=data['search_Id'], number=data['number']))
+    return jsonify(search_status(userPrompt=data['prompt'], userProfile=data['profile'], imageName=data['imageName'], search_Id=data['search_Id'], number=data['number']))
 
 
 if __name__ == '__main__':
