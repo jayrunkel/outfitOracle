@@ -5,10 +5,9 @@ import pprint
 import pymongo
 import logging
 import uuid
-from prompt_img import generate_dalle
-from search_db import search_db
 import re
 import threading
+import ast
 
 
 def generate_filters(articles, description):
@@ -195,4 +194,4 @@ response = {"black fedora": {"articleType": {"$eq": "Fedora"}, "baseColour": {"$
             "black dress pants": {"articleType": {"$eq": "Pants"}, "baseColour": {"$eq": "Black"}, "usage": {"$eq": "Formal"}},
             "silver watch": {"articleType": {"$eq": "Watch"}, "baseColour": {"$eq": "Silver"}, "usage": {"$in": ["Formal", "Smart Casual"]}}}
 
-print(generate_filters(articles, description))
+# print(generate_filters(articles, description))

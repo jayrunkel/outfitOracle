@@ -12,7 +12,9 @@ import os
 import io
 import pymongo
 import datetime
-# kill -9 $(lsof -t -i:5000)
+'''
+kill -9 $(lsof -t -i:5000)
+'''
 
 app = Flask(__name__)
 

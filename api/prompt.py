@@ -92,18 +92,6 @@ def prompt(data):
           {
               "outfit_articles": ["dark blue jeans", "black shoes", "black shirt", "black tie", "black suit", "black sunglasses", "black leather gloves", "silver watch"],
               "outfit_name": "Catchy name for the outfit",
-              "attribute_extract": { 
-                  "gender": "" ,
-                  "masterCategory": "Accessories",
-                  "subCategory": "Watches",
-                  "articleType": "Watches",
-                  "baseColour": "<Explicitly use color names not code versions>",
-                  "season": "<based on user prompt, if not, make best guess>",
-                  "usage": "Casual",
-                  "price": 63.77,
-                  "averageRating": 4.73,
-                  ...
-              },
               "gpt_response": " You're a fasion advisor and don't reference customerprofile explicitly . Provide Text description / justification of this outfit and how it fits the prompt in twitter size ( up to 280 characters) - Exclude hashtags. ",
               "dalle_prompt": "You are a DALL-E image generator that will create an image that complyies with OpenAI's safety system (aka, keep it PG) with <insert outfit articles here. Ensure the articles of clothing is illustrated from head to toe. Ensure that it's using the customerprofile information to fill in the gaps of the person. specify based on the attribute_extract and prompt but prioritize the customerprofile information. it's paramount to describe head to toe of the complete outfit>. Show "Display a full-body view" or "Present a complete outfit from head to toe""
           },
@@ -113,7 +101,7 @@ def prompt(data):
     '''
 
     # gpt_instructions = "Give me a JSON form of an array of clothing based on the following prompt: "
-    gpt_instructions = "THE RESPONSE MUST BE IN STRICT VALID JSON. Refer customerprofile as " + customerprofile+" .I  am passing this to an API, so your response must be in valid JSON format. Using the user prompt below, create 3 outfits and embed them into a master array. If the user has a customerprofile object:, overwrite the attributes from the customerprofile object in the attribute_extract object.Ensure that the json_data is valid JSON.Minify the JSON object before submitting it as a response. The final output must be formatted in VALID JSON (values are just examples) as follows: \n'''" + \
+    gpt_instructions = "THE RESPONSE MUST BE IN STRICT VALID JSON. scape any double quotes. Refer customerprofile as " + customerprofile+" .I  am passing this to an API, so your response must be in valid JSON format. Using the user prompt below, create 3 outfits and embed them into a master array. If the user has a customerprofile object:, overwrite the attributes from the customerprofile object in the attribute_extract object.Ensure that the json_data is valid JSON.Minify the JSON object before submitting it as a response. The final output must be formatted in VALID JSON (values are just examples) as follows: \n'''" + \
         json_data + "'''\n The comments are only there for your instruction and should be left out of the response. Any attributes that are applicable to all articles should be included in the attribute_extract object but also prioritize any data from customerprofile. Add some variance and be sure that no outfit should share more than 3 of the same articles. REMEMBER: THE RESPONSE MUST BE IN STRICT VALID JSON."
 
     complete_prompt = gpt_instructions + " User prompt:" + user_prompt
@@ -146,7 +134,7 @@ def prompt(data):
             # Send a completion call to generate an answer
             response = openai.Completion.create(
                 engine=deployment_name,
-                prompt="Fix the JSON response from the previous prompt to be STRICT VALID JSON... if there are any characters before the first {, strip them: ```" +
+                prompt="Fix the JSON response from the previous prompt to be STRICT VALID JSON and escape any double quotes... if there are any characters before the first {, strip them: ```" +
                 response_text + "```",
                 max_tokens=4000
             )

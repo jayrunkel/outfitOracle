@@ -7,6 +7,8 @@ import uuid
 import json
 from datetime import datetime, timedelta
 import pprint
+from pre_filters import generate_filters
+import ast
 
 
 def search_db(data):
@@ -33,7 +35,15 @@ def search_db(data):
 
         outfit_results = []
 
-        for attribute in outfit_attributes['attribute_extract']:
+        # pass articles and gpt_response
+        '''prefilters = generate_filters(
+            articles=outfit_attributes['outfit_articles'],
+            description=outfit_attributes['gpt_response']
+        )'''
+
+        print(prefilters)
+
+        for attribute in outfit_attributes['outfit_articles']:
             # Encode each outfit attribute array
             encoded = model.encode(json.dumps(attribute)).tolist()
 
@@ -46,7 +56,8 @@ def search_db(data):
                             "vector": vector_query,
                             "path": "imageVector",
                             "k": 10
-                        }
+                        },
+                        # "filter": {prefilters[attribute]}
                     }
                 },
                 {
@@ -69,7 +80,15 @@ def search_db(data):
             ]
 
             # Execute the pipeline
-            outfit_results.append(list(product_collection.aggregate(pipeline)))
+            try:
+                outfit_results.append(
+                    list(product_collection.aggregate(pipeline)))
+            except Exception as e:
+                print(json.dumps(prefilters[attribute], indent=2))
+                # remove filter
+                del pipeline[0]["$search"]["filter"]
+                outfit_results.append(
+                    list(product_collection.aggregate(pipeline)))
 
         # Append results for this outfit array to the list
         results.append({'outfit_array': outfit_attributes,
