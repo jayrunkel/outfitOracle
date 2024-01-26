@@ -13,8 +13,7 @@ const Hero=() =>
 {
   const router=useRouter();
   //const [selectedImageId, setSelectedImageId] = useState("");
-  //const [selectedImageSearchId, setSelectedImageSearchId] = useState("");
-  //const [selectedImageLink, setSelectedImageLink] = useState("");
+  //const [selectedImageSearchId, setSelectedImageSearchId] = useState("");  //const [selectedImageLink, setSelectedImageLink] = useState("");
   //const [prompt, setPrompt] = useState("");
   //const [images, setImages] = useState([]);
   const [image, setImage] = useState("");
