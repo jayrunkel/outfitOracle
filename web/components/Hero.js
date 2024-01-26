@@ -17,6 +17,7 @@ const Hero = () => {
   //const [images, setImages] = useState([]);
   const [image, setImage] = useState("");
   const [imageBase64, setImageBase64] = useState("");
+  const [engineProcessing, setEngineProcessing] = useState(false);
 
   /*
   async function getImagesFromDB() {
@@ -55,7 +56,7 @@ const Hero = () => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault()
     console.log("form submitted");
-
+    setEngineProcessing(false);
 
     const data = {
       prompt: event.target.prompt.value,
@@ -101,8 +102,8 @@ const Hero = () => {
 
         const resBody = await response.json();
         console.log(resBody);
-        
-        alert(`Presenting search ID data: ${resBody}`)
+        setEngineProcessing(false);
+        //alert(`Presenting search ID data: ${resBody}`)
         //alert(`[hack] Presenting search ID data: ${selectedImageSearchId}`)
       
 
@@ -115,6 +116,10 @@ const Hero = () => {
     catch (error) {
         console.error('Error sending request to Outfit Oracle Engine:', error);
     }
+  }
+
+  const getAIStatus = () => {
+
   }
 
   const handleImageChange = (e) => {
@@ -170,7 +175,7 @@ const Hero = () => {
           
             <button className="flex items-center mt-4 px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500"
                     type="submit">
-              <span>Outfit Oracle</span>
+              <span>Hoot @Outfit Oracle</span>
               <ArrowNarrowRightIcon className="w-5 h-5" />
             </button>
         
@@ -178,8 +183,26 @@ const Hero = () => {
         
       </div>
         </div>
-        </form>          
-        <ImagePreview images={[image ? image : null]} className="w-300 h-300"/>
+        </form>
+        <div>   
+           <ImagePreview images={[image ? image : null]} className="w-300 h-300"/>
+
+            {
+              engineProcessing ?
+              <div className="">
+                <div id="statusBox">
+                  <span id="statusMessage">We are working on your outfit recommendation</span>
+                </div>
+                <button className={"flex items-center mt-4 px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500"} 
+                  id="engineProcessing" 
+                  type="button"
+                  onClick={getAIStatus}>
+                  status
+                </button>
+                </div>
+              : null
+            }
+        </div>
       </div>
     </div>  
   </div>
