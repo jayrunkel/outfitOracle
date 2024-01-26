@@ -5,7 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+	"extends": ["next", "next/core-web-vitals"]
     ],
     "parserOptions": {
         "ecmaVersion": "latest",

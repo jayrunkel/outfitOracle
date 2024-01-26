@@ -1,51 +1,51 @@
-// From: https://reacthustle.com/blog/how-to-create-react-multiple-file-upload-using-nextjs-and-typescript?expand_article=1
-// components/ImagePreview.tsx
 import React from "react";
 import Image from "next/image";
 import PropTypes from "prop-types";
 
-/*
-type Props =
-  images: File[];
-};
-*/
 
+const ImagePreview=({ images, onClick }) =>
+{
+    const MagnifyingGlassIcon=() => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 490 490">
+            <path fill="none" stroke="#FFF" strokeWidth="36" strokeLinecap="round"
+                d="m280,278a153,153 0 1,0-2,2l170,170m-91-117 110,110-26,26-110-110" />
+        </svg>
+    );
 
-const ImagePreview = ({ images }) => {
-
-    const buildImageDivs = (pictures) => {
-        console.log({pictures: pictures});
-        if (typeof pictures === 'undefined' || pictures === null || pictures.length === 0) 
-           return null;
+    const buildImageDivs=(pictures) =>
+    {
+        if (typeof pictures==='undefined'||pictures===null||pictures.length===0)
+            return null;
         else return (
-            pictures.map((image) => {
-                console.log({image: image});
-                if (typeof image !== "undefined" && image !== null) {
-                    const src = URL.createObjectURL(image);
+            pictures.map((image) =>
+            {
+                if (typeof image!=="undefined"&&image!==null) {
+                    const src=URL.createObjectURL(image);
                     return (
-                        <div className="relative aspect-video col-span-4" key={image.name}>
-                            <Image src={src} alt={image.name} className="object-cover" height="120" width="100" />
+                        <div className="image-container" key={image.name} onClick={() => onClick(src)}>
+                            <Image src={src} alt={image.name} className="object-cover" layout="fill" />
+                            <div className="magnifying-glass">
+                                <MagnifyingGlassIcon />
+                            </div>
                         </div>
                     );
                 }
             })
         )
-        }
+    }
 
     return (
-        <div className="h-500">
-            <div className="grid grid-cols-12 gap-2 my-2">
-             {
-                 buildImageDivs(images)   
-            }
-            </div>
+
+        <div className="grid grid-cols-12 gap-2 my-2">
+            {buildImageDivs(images)}
         </div>
+
     );
 };
 
-ImagePreview.propTypes = {
-    images: PropTypes.arrayOf(PropTypes.object)
-  }
-  
+ImagePreview.propTypes={
+    images: PropTypes.arrayOf(PropTypes.object),
+    onClick: PropTypes.func // Add onClick to propTypes
+}
 
 export default ImagePreview;

@@ -25,12 +25,34 @@ def generate_filters(articles, description):
     # for each article, create a json object with the article as the key and a blank object as the value
     articles_object = {}
     for article in articles:
-        articles_object[article] = {}
+        articles_object[article] = []
 
     articles_object = json.dumps(articles_object)
 
+    example_search_filter = [
+        {"text": {
+            "query": "Blazers",
+            "path": "articleType"
+        }},
+        {"text": {
+            "query": "Churidar",
+            "path": "articleType"
+        }},
+        {"text": {
+            "query": "Navy Blue",
+            "path": "baseColour"
+        }}
+    ]
+
+    articles_object = {}
+    for article in articles:
+        articles_object[article] = example_search_filter
+
+    example_search_filter = json.dumps(example_search_filter)
+    articles_object = json.dumps(articles_object)
+
     original_prompt = f"""
-    You are a MongoDB Analyst. You are tasked with building the filter option of an MQL stage in JSON format to pass to an API. The first character of your response should be "{" and the last should be "}"... there should not be any other character outside of the json object.\n
+    You are a MongoDB Analyst. You are tasked with building the atlas search filter option of an Atlas search in JSON format. The first character of your response should be "[" and the last should be "]"... there should not be any other character outside of the json object.\n
     
     I'm trying to filter products in a MongoDB databass by their attributes to match this outfit description: \n
     {description} \n
@@ -38,15 +60,18 @@ def generate_filters(articles, description):
     Update the `output` variable below and see if you can build a filter for each of the articles (object key) to help us narrow down the right product for the above outfit description, only using the `available filter options` below. \n
     
     - You must be very sure, or you should not choose that value. If the filter is redundant or doesn't match the article and description, don't create it.\n
-    - The output should be a single JSON object with each article as its own key and the value will be the MQL filter as a json object. \n
-    - The filter should be a JSON object of one or multiple filters that use only these options: $eq, $in. \n
-    - I never want to see masterCategory subCategory articleType in the same filter. Only the most encompasing filter for the article should be used. \n
-    - There must be a category or article type at the minimum, and match color best you can, or us $in to get similar colors \n
+    - The output should be a single JSON object with each article as its own key and the value will be the filter as a json array. \n
+    - The filter should be a JSON object of one or multiple filters and you only need to choose a path (field) and a query (value). \n
+    - There must be a category or article type at the minimum, and match color best you can, or create a few filters for similar colors \n
     
     If your response is not valid JSON, I will not be able to use it. Do not include the object name. \n
     
-    Is the first character of your response "{" and the last "}"? If not, I will remove all of your GPUs and donate them to crypto bros for their mining rigs. \n
-    output:
+    Is the first character of your response "[" and the last "]"? If not, I will remove all of your GPUs and donate them to crypto bros for their mining rigs. \n
+    example search filter format: \n
+    ```json
+    {example_search_filter}``` \n
+    
+    output (format is not up for interpretation, only the path and query):
     ```json
     {articles_object}``` \n
     
@@ -84,36 +109,45 @@ def generate_filters(articles, description):
 
                 # strip anything outside of the json object
 
-                response_text = re.sub(r'[^{,}]+', '', response_text)
+                response_text = re.sub(r'[^\[,\]]+', '', response_text)
                 response_text = response_text.replace(",,", ",")
 
             try:
                 json.loads(response_text)
-            except json.JSONDecodeError:
-                # ask openai to fix the json
+                response_text = ast.literal_eval(response_text)
 
-                prompt = f"""fix the json and remove any comments: {response_text}"""
-
-                response = openai.Completion.create(
-                    engine="outfit-oracle-gpt-turbo-instruct",
-                    prompt=prompt,
-                    max_tokens=4000
-                )
-
-                response_text = response['choices'][0]['text'].strip()
+            except:
 
                 try:
                     json.loads(response_text)
-                    for article in articles:
-                        if article not in json.loads(response_text):
-                            raise Exception(
-                                f"Article {article} was not found in the response")
-                except Exception as e:
-                    response_text = generate_filters(articles, description)
+                except json.JSONDecodeError:
+                    # ask openai to fix the json
+
+                    prompt = f"""fix the json and remove any comments: {response_text}"""
+
+                    response = openai.Completion.create(
+                        engine="outfit-oracle-gpt-turbo-instruct",
+                        prompt=prompt,
+                        max_tokens=4000
+                    )
+
+                    response_text = response['choices'][0]['text'].strip()
+
+                    try:
+                        json.loads(response_text)
+                        for article in articles:
+                            if article not in json.loads(response_text):
+                                raise Exception(
+                                    f"Article {article} was not found in the response")
+                    except Exception as e:
+                        response_text = generate_filters(articles, description)
 
     except Exception as e:
         logging.warning("An error occurred:", str(e))
 
+    # replace "terms" with "text" and "value" with "query"
+    response_text = response_text.replace("terms", "text")
+    response_text = response_text.replace("value", "query")
     return (response_text)
 
 
