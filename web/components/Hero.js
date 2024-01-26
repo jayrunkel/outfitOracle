@@ -13,12 +13,15 @@ const Hero=() =>
 {
   const router=useRouter();
   //const [selectedImageId, setSelectedImageId] = useState("");
-  //const [selectedImageSearchId, setSelectedImageSearchId] = useState("");  //const [selectedImageLink, setSelectedImageLink] = useState("");
+  //const [selectedImageSearchId, setSelectedImageSearchId] = useState("");
+  //const [selectedImageLink, setSelectedImageLink] = useState("");
   //const [prompt, setPrompt] = useState("");
   //const [images, setImages] = useState([]);
-  const [image, setImage] = useState("");
-  const [imageBase64, setImageBase64] = useState("");
-  const [engineProcessing, setEngineProcessing] = useState(false);
+  const [ image, setImage ]=useState("");
+  const [ imageBase64, setImageBase64 ]=useState("");
+  const [ engineProcessing, setEngineProcessing ]=useState(false);
+  const [ number, setNumber ]=useState(1);
+  const [ prompt, setPrompt ]=useState('');
 
   /*
   async function getImagesFromDB() {
@@ -77,6 +80,9 @@ const Hero=() =>
     console.log("form submitted");
     setEngineProcessing(false);
 
+    window.owl_displayMessage("Here we go!");
+
+
     const data={
       prompt: event.target.prompt.value,
       image: imageBase64,
@@ -121,12 +127,8 @@ const Hero=() =>
         });
       */
 
-        const resBody = await response.json();
-        console.log(resBody);
-        setEngineProcessing(false);
-        //alert(`Presenting search ID data: ${resBody}`)
-        //alert(`[hack] Presenting search ID data: ${selectedImageSearchId}`)
-      
+      const resBody=await response.json();
+      console.log(resBody);
 
       //alert(`Presenting search ID data: ${resBody}`)
       setEngineProcessing(false);
@@ -151,11 +153,65 @@ const Hero=() =>
 
   }
 
-  const getAIStatus = () => {
+  const handlePromptChange=(event) =>
+  {
+    setPrompt(event.target.value);
+  };
+
+  const callSearchProgress=async () =>
+  {
+    const customerId="65ab11d6f647fac4814d40df"
+    const payload={
+      prompt: prompt,
+      customerId: customerId,
+      search_Id: "2",
+      number: number,
+    };
+
+    try {
+      const progress_response=await fetch('/api/searchProgress', {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(payload),
+      });
+
+      if (progress_response.ok) {
+        const progress_data=await progress_response.json(); // Parse the JSON response
+        console.log("progress_data: ", progress_data);
+        window.owl_displayMessage(progress_data.message, 10);
+        setNumber(number+1); // Increment the number
+        console.log("number: ", number);
+      } else {
+        // Handle non-OK responses
+        console.error('Non-OK response:', await progress_response.text());
+      }
+
+
+
+      console.log("Full progress_response:", progress_response);
+    } catch (error) {
+      console.error('Progress error:', error);
+      window.owl_displayMessage(error);
+    }
+  };
+
+  /*// useEffect hook to set up the interval
+  useEffect(() =>
+  {
+    const intervalId=setInterval(callSearchProgress, 7000); // Call every 7 seconds
+
+    return () => clearInterval(intervalId); // Cleanup function to clear interval
+  }, [ number ]); // Dependency array includes number to update it in interval calls
+*/
+
+  const getAIStatus=() =>
+  {
 
   }
-
-  const handleImageChange = (e) => {
+  const handleImageChange=(e) =>
+  {
     if (e.target.files) {
       //convert `FileList` to `File[]`
       const _files=Array.from(e.target.files);
@@ -181,64 +237,55 @@ const Hero=() =>
 
   return ( // overflow-hidden bg-cover bg-center relative
     <div>
-      <div className="grid grid-cols-2 gap-4">  
-        <Image
-          src="https://outfitoracle-mtfxc.mongodbstitch.com/images/owl.png"
-          alt="Owl Image"
-          width="300"
-          height="500"
-          //layout="fill"
-          //objectFit="cover"
-          //className="absolute z-0"
-        />
-        <div className="grid grid-cols-2 gap-4">
-          <form name="promptForm" onSubmit={handleSubmit}>
-            <div className="w-300 h-300">
-            
-             <label className="block text-gray-700 text-sm font-bold mb-0" htmlFor="prompt">
-               Describe Your Dream Outfit
-             </label>    
-             <textarea id="prompt" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your dream outfit..."></textarea>
-             <label className="block text-gray-700 text-sm font-bold mt-4 mb-0" htmlFor="image">
-               Provide Sample Outfit Picture
-             </label>
-             <CustomFileSelector accept="image/png, image/jpeg" onChange={handleImageChange}/>
-          <div className="">
-        <div className="px-10 max-w-xl">
-          
-            <button className="flex items-center mt-4 px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500"
-                    type="submit">
-              <span>Hoot @Outfit Oracle</span>
-              <ArrowNarrowRightIcon className="w-5 h-5" />
-            </button>
-        
+      <div className="grid grid-container gap-4">
+        <div className="h-300">
+          <div className="owl_parentContainer" id="owl_container">
+            <img class="owl_owlImage" src="./owl_speech_bubble/owl.jpeg" alt="Owl" />
+            <div id="owl_bubble">
+              <canvas id="owl_canvas1" width="300px" height="300px"></canvas>
+              <div id="owl_speechText"></div>
+            </div>
+          </div>
         </div>
-        
-      </div>
-        </div>
-        </form>
-        <div>   
-           <ImagePreview images={[image ? image : null]} className="w-300 h-300"/>
-
-            {
-              engineProcessing ?
-              <div className="">
-                <div id="statusBox">
-                  <span id="statusMessage">We are working on your outfit recommendation</span>
+        <script src="./owl_speech_bubble/speech_bubble.js"></script>
+        <div className="flex justify-end"> {/* This will push the child elements to the right */}
+          <div className="max-w-xs">
+            <form name="promptForm" onSubmit={handleSubmit} className="w-300">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="prompt">
+                Describe Your Dream Outfit
+              </label>
+              <textarea id="prompt" rows="4"
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                placeholder="Describe your dream outfit..." onChange={handlePromptChange}></textarea>
+              <div className="grid grid-cols-4 gap-4 mt-4"> {/* Adjusted grid for nested elements */}
+                {/* File selector and submit button */}
+                <div className="col-span-3 flex flex-col space-y-4"> {/* 75% width */}
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
+                    Provide Sample Outfit Picture
+                  </label>
+                  <CustomFileSelector accept="image/png, image/jpeg" onChange={handleImageChange} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" />
+                  <button className="flex items-center justify-center px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500 w-full" type="submit">
+                    <span>Hoot @ Outfit Oracle</span>
+                    <ArrowNarrowRightIcon className="w-5 h-5 ml-2" />
+                  </button>
                 </div>
-                <button className={"flex items-center mt-4 px-3 py-2 bg-green-600 text-white text-sm uppercase font-medium rounded hover:bg-green-500 focus:outline-none focus:bg-green-500"} 
-                  id="engineProcessing" 
-                  type="button"
-                  onClick={getAIStatus}>
-                  status
-                </button>
-                </div>
-              : null
-            }
-        </div>
-      </div>
-    </div>  
-  </div>
+                {/* Image preview */}
+                {image&&(
+                  <div className="col-span-1"> {/* 25% width */}
+                    <ImagePreview
+                      images={[ image ]}
+                      className="w-full h-auto" /* Adjusted height for responsive behavior */
+                      onClick={handleImageClick}
+                    />
+                  </div>
+                )}
+              </div>
+            </form>
+            <Modal isOpen={isModalOpen} onClose={closeModal}>
+              <img src={selectedImage} alt="Selected" />
+            </Modal>
+          </div></div></div>
+    </div>
   );
 };
 
