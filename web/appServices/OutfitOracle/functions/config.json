@@ -1,0 +1,68 @@
+[
+    {
+        "name": "getAllProducts",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "getUniqueCategories",
+        "private": false,
+        "run_as_system": true,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getOneProduct",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "searchProducts",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "searchAutoComplete",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "saveProfile",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getProfile",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "saveProfileImage",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getSearchProducts",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getSearchOutfitResults",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getOneOutfit",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "getAllImages",
+        "private": false,
+        "run_as_system": true
+    },
+    {
+        "name": "getOneImage",
+        "private": false,
+        "disable_arg_logs": true
+    }
+]
