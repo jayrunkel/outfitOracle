@@ -56,6 +56,7 @@ var owl_instance=null;
 
 function owl_animateText(text, duration)
 {
+    window.clearInterval(owl_instance);
     const speechText=document.getElementById('owl_speechText');
     speechText.innerHTML=''; // Clear existing text
 
@@ -83,11 +84,11 @@ function owl_animateText(text, duration)
         if (currentChar<text.length) {
             //check if speechText.children[ currentChar ] exists
             if (speechText.children[ currentChar ]!==null) {
-                speechText.children[ currentChar ].style.color='black';
+                (speechText.children[ currentChar ]||{}).style.color='black';
                 currentChar++;
             }
         } else {
-            clearInterval(owl_instance);
+            window.clearInterval(owl_instance);
         }
     }, intervalTime);
 
@@ -111,7 +112,7 @@ function owl_displayMessage(text, duration)
     speechText.style.paddingTop=parseInt(dimensions.topMargin)+'px';
     speechText.innerText=textArea;
 
-    duration=(duration==null||String(duration)==""||duration<0)? textArea.length/35:parseFloat(duration)
+    duration=(duration==null||String(duration)==""||duration<0)? textArea.length/25:parseFloat(duration)
 
     if (textArea.trim()!=='') {
         if (canvas.getContext) {

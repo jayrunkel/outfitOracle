@@ -80,11 +80,6 @@ const Hero=() =>
     console.log("form submitted");
     setEngineProcessing(false);
 
-    //clear all intervals
-    for (var i=1; i<99999; i++) {
-      window.clearInterval(i);
-    }
-
     window.owl_displayMessage("Here we go!");
 
 
@@ -115,7 +110,7 @@ const Hero=() =>
 
     console.log("sending data: ", JSONdata);
 
-    const intervalId=setInterval(callSearchProgress, 7000); // Call every 7 seconds
+    const intervalId=setInterval(callSearchProgress, 10000); // Call every 7 seconds
 
 
 
@@ -139,7 +134,7 @@ const Hero=() =>
       setEngineProcessing(false);
       //alert(`[hack] Presenting search ID data: ${selectedImageSearchId}`)
 
-      clearInterval(intervalId);
+      window.clearInterval(intervalId);
       setNumber(1);
       //clear all intervals
       for (var i=1; i<99999; i++) {
