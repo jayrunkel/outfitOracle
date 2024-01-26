@@ -30,13 +30,11 @@ def get_dense_captions(image):
 
     response = requests.post(url, params=params, headers=headers, json=data)
 
+    print(response.json())
     # concatenate the captions, denseCaptionsResult.values.text
     captions = ""
     for caption in response.json()["denseCaptionsResult"]["values"]:
         if caption["confidence"] >= .7:
             captions += caption["text"] + ". "
 
-    print(captions)
-
-
-get_dense_captions("65a800e2c1f235c036d65f78")
+    return (captions)

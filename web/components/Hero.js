@@ -1,15 +1,17 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 //import * as Realm from "realm-web";
 //import Link from "next/link";
+import Modal from './Modal'; // Adjust the path according to your file structure
 import { ArrowNarrowRightIcon } from "@heroicons/react/outline";
 import ImagePreview from "./ImagePreview";
 import CustomFileSelector from "./CustomFileSelect";
 //import process from "process";
 
-const Hero = () => {
-  const router = useRouter();
+const Hero=() =>
+{
+  const router=useRouter();
   //const [selectedImageId, setSelectedImageId] = useState("");
   //const [selectedImageSearchId, setSelectedImageSearchId] = useState("");
   //const [selectedImageLink, setSelectedImageLink] = useState("");
@@ -35,14 +37,16 @@ const Hero = () => {
   }
   */
 
-  function convertFileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
+  function convertFileToBase64(file)
+  {
+    return new Promise((resolve, reject) =>
+    {
+      const reader=new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
+      reader.onload=() => resolve(reader.result);
       // Typescript users: use following line
       // reader.onload = () => resolve(reader.result as string);
-      reader.onerror = reject;
+      reader.onerror=reject;
     });
   }
 
@@ -52,53 +56,71 @@ const Hero = () => {
   }, []);
   */
 
-  const handleSubmit = async (event) => {
+  const [ isModalOpen, setIsModalOpen ]=useState(false);
+  const [ selectedImage, setSelectedImage ]=useState(null);
+
+  const handleImageClick=(image) =>
+  {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal=() =>
+  {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
+
+  const handleSubmit=async (event) =>
+  {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault()
     console.log("form submitted");
     setEngineProcessing(false);
 
-    const data = {
+    const data={
       prompt: event.target.prompt.value,
       image: imageBase64,
       //email: "jay.runkel@mongodb.com",
       //profile: profile
-      }
-      
-      
+    }
 
-          
     // Send the data to the server in JSON format.
-    const JSONdata = JSON.stringify(data)
+    const JSONdata=JSON.stringify(data)
 
     // API endpoint where we send form data.
-    const endpoint = '/api/sendReqToAIEngine';
+    const endpoint='/api/sendReqToAIEngine';
 
     // Form the request for sending data to the server.
-    const options = {
+    const options={
       // The method is POST because we are sending data.
       method: 'POST',
       // Tell the server we're sending JSON.
-      headers: new Headers ({
+      headers: new Headers({
         'Content-Type': 'application/json'
-        }),
+      }),
       // Body of the request is the JSON data we created above.
       body: JSONdata
     }
-    
-    console.log("sending data: ", JSONdata);
-    try {
-        // Make an API call to the route you created in step 2
 
-        const response = await fetch(endpoint, options);
-        /*
-        const response = await axios({
-            method: "post",
-            url: "/api/saveProfileForm",
-            data: formDataToSend,
-            headers: { "Content-Type": "multipart/form-data" },
-          });
-        */
+    console.log("sending data: ", JSONdata);
+
+    const intervalId=setInterval(callSearchProgress, 10000); // Call every 7 seconds
+
+
+
+    try {
+      // Make an API call to the route you created in step 2
+
+      const response=await fetch(endpoint, options);
+      /*
+      const response = await axios({
+          method: "post",
+          url: "/api/saveProfileForm",
+          data: formDataToSend,
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      */
 
         const resBody = await response.json();
         console.log(resBody);
@@ -107,15 +129,27 @@ const Hero = () => {
         //alert(`[hack] Presenting search ID data: ${selectedImageSearchId}`)
       
 
-    router.push({
-      pathname: `/products/aiEngine/${resBody.searchID}`
-      //pathname: `/products/aiEngine/${selectedImageSearchId}`
-      //pathname: `/products/aiEngine/20240117145550948214`
+      //alert(`Presenting search ID data: ${resBody}`)
+      setEngineProcessing(false);
+      //alert(`[hack] Presenting search ID data: ${selectedImageSearchId}`)
+
+      window.clearInterval(intervalId);
+      setNumber(1);
+      //clear all intervals
+      for (var i=1; i<99999; i++) {
+        window.clearInterval(i);
+      }
+      router.push({
+        pathname: `/products/aiEngine/${resBody.searchID}`
+        //pathname: `/products/aiEngine/${selectedImageSearchId}`
+        //pathname: `/products/aiEngine/20240117145550948214`
       });
     }
     catch (error) {
-        console.error('Error sending request to Outfit Oracle Engine:', error);
+      console.error('Error sending request to Outfit Oracle Engine:', error);
     }
+
+
   }
 
   const getAIStatus = () => {
@@ -125,13 +159,13 @@ const Hero = () => {
   const handleImageChange = (e) => {
     if (e.target.files) {
       //convert `FileList` to `File[]`
-      const _files = Array.from(e.target.files);
-      const filesCopy = _files.slice(0,1);
-      setImage(filesCopy[0]);
-      
-      convertFileToBase64(filesCopy[0])
-         .then(result => setImageBase64(result))
-         .catch(error => console.error(error));
+      const _files=Array.from(e.target.files);
+      const filesCopy=_files.slice(0, 1);
+      setImage(filesCopy[ 0 ]);
+
+      convertFileToBase64(filesCopy[ 0 ])
+        .then(result => setImageBase64(result))
+        .catch(error => console.error(error));
     }
 
 
@@ -207,6 +241,6 @@ const Hero = () => {
     </div>  
   </div>
   );
-}; 
-   
+};
+
 export default Hero;

@@ -52,9 +52,11 @@ function owl_drawBubble(ctx, width, height, birdHeight)
     ctx.stroke();
 }
 
+var owl_instance=null;
 
 function owl_animateText(text, duration)
 {
+    window.clearInterval(owl_instance);
     const speechText=document.getElementById('owl_speechText');
     speechText.innerHTML=''; // Clear existing text
 
@@ -77,15 +79,19 @@ function owl_animateText(text, duration)
     let currentChar=0;
     const intervalTime=(duration*1000)/text.length; // Time per character
 
-    const interval=setInterval(() =>
+    owl_instance=setInterval(() =>
     {
         if (currentChar<text.length) {
-            speechText.children[ currentChar ].style.color='black';
-            currentChar++;
+            //check if speechText.children[ currentChar ] exists
+            if (speechText.children[ currentChar ]!==null) {
+                (speechText.children[ currentChar ]||{}).style.color='black';
+                currentChar++;
+            }
         } else {
-            clearInterval(interval);
+            window.clearInterval(owl_instance);
         }
     }, intervalTime);
+
 }
 
 
@@ -100,12 +106,13 @@ function owl_displayMessage(text, duration)
     var tailWidth=tailHeight*1.5;
 
     // Adjust speechText size
+
     speechText.style.width=parseInt(dimensions.width)+'px';
     speechText.style.height=parseInt(dimensions.height)+'px';
     speechText.style.paddingTop=parseInt(dimensions.topMargin)+'px';
     speechText.innerText=textArea;
 
-    duration=(duration==null||String(duration)==""||duration<0)? textArea.length/35:parseFloat(duration)
+    duration=(duration==null||String(duration)==""||duration<0)? textArea.length/25:parseFloat(duration)
 
     if (textArea.trim()!=='') {
         if (canvas.getContext) {
@@ -128,9 +135,9 @@ function owl_displayMessage(text, duration)
 function owl_calculateTextDimensions(text)
 {
     const maxWidth=300-30; // Maximum width you want for the bubble
-    const maxHeight=300-10; // Maximum height you want for the bubble
+    const maxHeight=300-20; // Maximum height you want for the bubble
     const charWidth=12; // Approximate width of a character
-    const lineHeight=14; // Line height
+    const lineHeight=19; // Line height
     const minHeight=300/3; // Minimum height of the bubble
 
     const charsPerLine=Math.floor(maxWidth/charWidth);
@@ -138,7 +145,6 @@ function owl_calculateTextDimensions(text)
     {
         return count+Math.ceil(line.length/charsPerLine);
     }, 0);
-
     // calc top margin using (min height/line height ) - (number of lines) * line height
     const fillSpace=(minHeight/lineHeight-lineCount)/2
     const topMargin=((fillSpace*lineHeight)>(lineHeight*1.4))? fillSpace*lineHeight:0;
@@ -151,17 +157,10 @@ function owl_calculateTextDimensions(text)
 
     const actualWidth=Math.min(maxWidth, charsPerLine*charWidth, longestLineLength*charWidth);
     const actualHeight=Math.max(minHeight, Math.min(lineCount*lineHeight, maxHeight));
+    /*console.log("actualWidth: "+actualWidth);
+    console.log("actualHeight: "+actualHeight);*/
 
     return { width: actualWidth, height: actualHeight, topMargin: topMargin };
-}
-
-window.onload=function ()
-{
-    var linkElement=document.createElement("link");
-    linkElement.rel="stylesheet";
-    linkElement.href="./owl_speech_bubble/speech_bubble.css"; //Replace here
-
-    document.head.appendChild(linkElement);
 }
 
 // only display if owl_textBox is found
@@ -186,7 +185,7 @@ if (document.getElementById('owl_textBox')) {
         }
         var linkElement=document.createElement("link");
         linkElement.rel="stylesheet";
-        linkElement.href="./owl_speech_bubble/speech_bubble.css"; //Replace here
+        linkElement.href="/owl_speech_bubble/speech_bubble.css"; //Replace here
 
         document.head.appendChild(linkElement);
 

@@ -29,25 +29,106 @@ def search_db(data):
 
     results = []
 
+    match (data["customerProfile"]["gender"]).lower():
+        case "male" | "m" | "man":
+            gender = "Men"
+        case "female" | "w" | "woman":
+            gender = "Women"
+        case "boy":
+            gender = "Boys"
+        case "girl":
+            gender = "Girls"
+        case _:
+            gender = "Unisex"
+
     for outfit_attributes in outfit_arrays_list:
 
         # pprint.pprint(outfit_attributes)
 
         outfit_results = []
+        perfect = []
 
         # pass articles and gpt_response
-        '''prefilters = generate_filters(
+        prefilters = generate_filters(
             articles=outfit_attributes['outfit_articles'],
             description=outfit_attributes['gpt_response']
-        )'''
+        )
 
-        # print(prefilters)
+        print(prefilters)
+
+        filter_errors = 0
 
         for attribute in outfit_attributes['outfit_articles']:
             # Encode each outfit attribute array
             encoded = model.encode(json.dumps(attribute)).tolist()
 
             vector_query = encoded
+
+            gender_filter = {
+                'compound': {
+                    'must': [
+                        {'compound':
+                            {'should': []}
+                         }
+                    ],
+                    'should': [],
+                    'filter': [{
+                        'compound': {
+                            'filter': [
+                                {
+                                    'compound': {
+                                        'should': [
+                                            {'text': {
+                                                'query': gender,
+                                                'path': 'gender'
+                                            }
+                                            }, {'text': {
+                                                'query': 'Unisex',
+                                                'path': 'gender'
+                                            }
+                                            }]}}]}}]
+                }}
+
+            try:
+                prefilter = json.loads(prefilters)[attribute]
+                prefilter_formatted = gender_filter
+                prefilter_formatted["compound"]["should"] = prefilter
+
+                # Create a list to hold items that need to be moved to 'must'
+                must_items = []
+                # Identify items that need to be moved from 'should' to 'must'
+                for item in prefilter_formatted["compound"]["should"]:
+                    if "articleType" in item["text"]["path"]:
+                        must_items.append(item)
+
+                # Add identified items to 'must'
+                prefilter_formatted["compound"]["must"][0]["compound"]["should"].extend(
+                    must_items)
+                # Remove the moved items from 'should'
+                prefilter_formatted["compound"]["should"] = [
+                    item for item in prefilter_formatted["compound"]["should"]
+                    if item not in must_items
+                ]
+                # Now prefilter_formatted is correctly formatted
+            except json.JSONDecodeError as e:
+                print(f"JSON decode error: {e}")
+                print("Prefilter Error")
+                prefilter_formatted = gender_filter
+                del prefilter_formatted["compound"]["should"]
+                del prefilter_formatted["compound"]["must"]
+            except KeyError as e:
+                print(f"Key error: {e}")
+                print("Prefilter Error")
+                prefilter_formatted = gender_filter
+                del prefilter_formatted["compound"]["should"]
+                del prefilter_formatted["compound"]["must"]
+            except:
+                # If there is no prefilter, set it to an empty dictionary
+                print("Prefilter Error")
+                prefilter_formatted = gender_filter
+                del prefilter_formatted["compound"]["should"]
+                del prefilter_formatted["compound"]["must"]
+
             pipeline = [
                 {
                     "$search": {
@@ -55,9 +136,9 @@ def search_db(data):
                         "knnBeta": {
                             "vector": vector_query,
                             "path": "imageVector",
-                            "k": 10
-                        },
-                        # "filter": {prefilters[attribute]}
+                            "k": 100,
+                            "filter": prefilter_formatted
+                        }
                     }
                 },
                 {
@@ -76,6 +157,14 @@ def search_db(data):
                             '$meta': 'searchScore'
                         }
                     }
+                },
+                {
+                    "$sort": {
+                        "score": -1
+                    }
+                },
+                {
+                    "$limit": 10
                 }
             ]
 
@@ -83,18 +172,30 @@ def search_db(data):
             try:
                 outfit_results.append(
                     list(product_collection.aggregate(pipeline)))
+                perfect.append(attribute)
             except Exception as e:
-                print(json.dumps(prefilters[attribute], indent=2))
+                filter_errors += 1
+                print(prefilter_formatted)
                 # remove filter
-                del pipeline[0]["$search"]["filter"]
+                del pipeline[0]["$search"]["knnBeta"]["filter"]
                 outfit_results.append(
                     list(product_collection.aggregate(pipeline)))
+
+        # Loop through outfit_attributes['outfit_articles'] incrementally... if an item is present in perfect, add a . to the end of the item and update outfit_attributes['outfit_articles']
+        for i, item in enumerate(outfit_attributes['outfit_articles']):
+            if item in perfect:
+                outfit_attributes['outfit_articles'][i] = item + "."
+
+        if filter_errors == 0:
+            outfit_attributes['outfit_name'] = outfit_attributes['outfit_name'] + \
+                "."
 
         # Append results for this outfit array to the list
         results.append({'outfit_array': outfit_attributes,
                         'outfit_results': outfit_results,
                         'searchID': data['searchId'],
-                        'dalle_image': outfit_attributes['dalle_image']
+                        'dalle_image': outfit_attributes['dalle_image'],
+                        'filter_errors': filter_errors,
                         })
 
         # pprint.pprint(results)
@@ -115,7 +216,7 @@ def search_db(data):
     # Create index for expiration time
     collection.create_index('expiration_time')
 
-    print(json_result)
+    # print(json_result)
 
 
 test = [

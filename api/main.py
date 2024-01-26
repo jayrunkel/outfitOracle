@@ -5,10 +5,8 @@ from PIL import Image
 from vectorize import vectorize
 from search_progress import search_status
 import prompt
-import uuid
 from bson import binary, ObjectId
 import threading
-import os
 import io
 import pymongo
 import datetime
@@ -129,7 +127,7 @@ def send_prompt():
 @app.route("/search_progress", methods=["POST"])
 def search_progress():
     data = request.get_json()
-    return jsonify(search_status(userPrompt=data['prompt'], customerId=data['customerId'], imageName=data['imageName'], search_Id=data['search_Id'], number=data['number']))
+    return jsonify(search_status(userPrompt=data['prompt'], customerId=data['customerId'], search_Id=data['search_Id'], number=data['number']))
 
 
 if __name__ == '__main__':

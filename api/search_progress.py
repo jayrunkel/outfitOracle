@@ -9,7 +9,7 @@ import re
 import threading
 
 
-def search_status(userPrompt, customerId, imageName, search_Id, number):
+def search_status(userPrompt, customerId, search_Id, number):
     openai.api_key = "45eefc80e0914e64995ed91c3c7cf175"
     # your endpoint should look like the following https://YOUR_RESOURCE_NAME.openai.azure.com/
     openai.api_base = "https://outfitoracle.openai.azure.com/"
@@ -32,7 +32,13 @@ def search_status(userPrompt, customerId, imageName, search_Id, number):
     # check if search_Id exists in collection
     search_result = collection.find_one(query)
 
-    photoContent = "Woman in brown shirt and black pants"
+    try:
+        photoContent = db['userUploads'].find_one(
+            {}, sort=([("uploaded_timestamp", -1)]))
+
+        photoContent = json.dumps(photoContent['caption'])
+    except:
+        photoContent = ""
 
     if search_result:
         return {"status": "complete", "search_Id": search_Id, "message": "All done! I can't wait to show you what I picked out for you!"}

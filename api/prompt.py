@@ -6,7 +6,8 @@ import pymongo
 import logging
 import uuid
 from prompt_img import generate_dalle
-from search_db import search_db
+import search_db
+from save_img import save_img
 import re
 import threading
 
@@ -30,49 +31,26 @@ def prompt(data):
     user_prompt = data.get_json()['prompt']
     logging.info(user_prompt)
 
-    # mongo_uri = "mongodb+srv://GucciGang:GucciGang@guccigang.jxnbg.mongodb.net/?retryWrites=true&w=majority"
-    # db = "GucciGang"
-    # collection = "customerProfiles"
+    customerId = "65ab11d6f647fac4814d40df"
 
-    # connection = pymongo.MongoClient(mongo_uri)
+    mongo_uri = "mongodb+srv://GucciGang:GucciGang@guccigang.jxnbg.mongodb.net/?retryWrites=true&w=majority"
+    db = "GucciGang"
+    collection = "customerProfiles"
+
+    connection = pymongo.MongoClient(mongo_uri)
+
+    customer_data = connection[db][collection].find_one({"customerId": customerId}, projection={
+        "_id": 0, "images": 0, "imageBase64": 0})
+
+    print(customer_data)
+    image = save_img(data.get_json()['image'], str(searchId))
+
     # product_collection = connection[db][collection]
 
     # search the customerID (let's hardcode this value maybe for POC?)
     # consider the document model for the customerID - and pull attributes that could be useful for the user prompt.
-    # example:
 
-    '''
-    user_prompt1 = "I'm a casually stylish male with a light tan skin tone, looking for an outfit for a 'spy agents' themed company year-end party. My sizes are medium shirts, 32 waist pants, and my budget is up to $200. I prefer minimalist watches and sleek sunglasses for accessories, and comfortable loafers for footwear. The party is indoor, semi-formal, in cool weather. I like incorporating classic black and grey colors for the theme, and my shoe size is 10."
-
-    user_prompt2 = "I'm a casually fashionable female with a fair skin tone, seeking an ensemble for a 'spy agents' themed corporate end-of-year celebration. My clothing sizes vary: small tops, size 28 pants, with a budget of up to $250. I have a penchant for elegant bracelets and chic eyewear as accessories, paired with snug ankle boots for shoes. The event is an indoor, semi-formal affair in a cooler climate. I'm fond of blending traditional black and grey hues to suit the theme, and my shoe size is 8."
-
-
-    user_prompt3 = "I'm a woman planning to attend an upcoming EDM concert and I'm looking for some fashion advice. I want an outfit that's stylish, comfortable for dancing, and suitable for the energetic and vibrant atmosphere of an EDM event. I'm open to bold colors and unique designs that stand out in a crowd. Additionally, I'd appreciate suggestions for practical yet fashionable footwear, as I'll be on my feet most of the time. Any tips on accessories that complement the outfit and enhance the overall concert experience would also be welcome. My budget is $2000 and I'm a size 8."
-  '''
-
-    customerprofile = '''
-  {
-  "customerData": {
-    "customerId": "65a6f67fe84137eef3262f2d",
-    "firstName": "Jay",
-    "lastName": "Runkel",
-    "gender": "male",
-    "skinTone": "blue",
-    "heritage": "german",
-    "favoriteColor": "blue",
-    "preferredStyle": "sharp",
-    "age": 58,
-    "pictureFile": "ManStyle1.jpg",
-    "pantSize": "large",
-    "shirtSize": "small",
-    "email": "jay.runkel@mongodb.com"
-    }
-  }
-  '''
-
-    customer_data = json.loads(customerprofile)
-
-    # customerprofile = {"_id": {"$oid": "65a6c352363965e8f99bf81c"}, "customerId": "65a6f67fe84137eef3262f2d", "first": "Jay", "last": "Runkel", "gender": "male", "skinTone": "blue", "heritage": "german", "favColor": "blue", "preferredStyle": "sharp", "age": "58", "pictureFile": "ManStyle1.jpg", "pantSize": "large", "shirtSize": "small", "email": "jay.runkel@mongodb.com"}
+    customerprofile = json.dumps({"customerData": customer_data})
 
     # This will correspond to the custom name you chose for your deployment when you deployed a model.
     deployment_name = 'outfit-oracle-gpt-turbo-instruct'
@@ -93,7 +71,7 @@ def prompt(data):
               "outfit_articles": ["dark blue jeans", "black shoes", "black shirt", "black tie", "black suit", "black sunglasses", "black leather gloves", "silver watch"],
               "outfit_name": "Catchy name for the outfit",
               "gpt_response": " You're a fasion advisor and don't reference customerprofile explicitly . Provide Text description / justification of this outfit and how it fits the prompt in twitter size ( up to 280 characters) - Exclude hashtags. ",
-              "dalle_prompt": "You are a DALL-E image generator that will create an image that complyies with OpenAI's safety system (aka, keep it PG) with <insert outfit articles here. Ensure the articles of clothing is illustrated from head to toe. Ensure that it's using the customerprofile information to fill in the gaps of the person. specify based on the attribute_extract and prompt but prioritize the customerprofile information. it's paramount to describe head to toe of the complete outfit>. Show "Display a full-body view" or "Present a complete outfit from head to toe""
+              "dalle_prompt": "You are a director for a fashion magazine that will ask DALLE-2 to create an image that complies with OpenAI's safety system (aka, keep it PG) with <insert outfit articles here>. It should be photorealistic, and ensure that the articles of clothing is displayed from head to toe. Ensure that it's using the customerprofile information to fill in the gaps of the person. specify based on the attribute_extract and prompt but prioritize the customerprofile information. it's paramount to describe head to toe of the complete outfit. Be sure to include "Present a complete outfit from head to toe on a model""
           },
           //outfit 2, 3, etc
       ]
@@ -104,7 +82,8 @@ def prompt(data):
     gpt_instructions = "THE RESPONSE MUST BE IN STRICT VALID JSON. scape any double quotes. Refer customerprofile as " + customerprofile+" .I  am passing this to an API, so your response must be in valid JSON format. Using the user prompt below, create 3 outfits and embed them into a master array. If the user has a customerprofile object:, overwrite the attributes from the customerprofile object in the attribute_extract object.Ensure that the json_data is valid JSON.Minify the JSON object before submitting it as a response. The final output must be formatted in VALID JSON (values are just examples) as follows: \n'''" + \
         json_data + "'''\n The comments are only there for your instruction and should be left out of the response. Any attributes that are applicable to all articles should be included in the attribute_extract object but also prioritize any data from customerprofile. Add some variance and be sure that no outfit should share more than 3 of the same articles. REMEMBER: THE RESPONSE MUST BE IN STRICT VALID JSON."
 
-    complete_prompt = gpt_instructions + " User prompt:" + user_prompt
+    complete_prompt = gpt_instructions + " User prompt:" + user_prompt + \
+        " The user also uploaded an image of: " + json.dumps(image["caption"])
 
     try:
         # Send a completion call to generate an answer
@@ -155,6 +134,7 @@ def prompt(data):
 
         payload = json_data
         payload["searchId"] = str(searchId)
+        payload["customerProfile"] = customer_data
         # for each each payload.outfits, generate a dalle image and add it to the payload do these in parallel
 
         '''
@@ -191,7 +171,7 @@ def prompt(data):
 
         logging.info("All DALL-E images have been generated.")
 
-        search_db(payload)
+        search_db.search_db(payload)
         return {"searchID": str(searchId)}
 
     except json.JSONDecodeError as e:
